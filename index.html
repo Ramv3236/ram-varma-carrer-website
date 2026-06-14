@@ -40,6 +40,422 @@
   .orb-1 { width: 600px; height: 600px; top: -150px; left: -100px; background: radial-gradient(circle, #2997FF, transparent 70%); }
   .orb-2 { width: 500px; height: 500px; bottom: 20%; right: -100px; background: radial-gradient(circle, #8B5CF6, transparent 70%); }
 
+  /* ═══════════════════════════════════════════════════════════
+     PREMIERE PRO FULL EDITING ENVIRONMENT BACKGROUND
+  ═══════════════════════════════════════════════════════════ */
+
+  /* === BG VIDEO CANVAS === */
+  #bg-edit-canvas {
+    position: fixed; inset: 0; z-index: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.07; pointer-events: none;
+    filter: saturate(0.3) brightness(0.6);
+  }
+
+  .pp-timeline-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+
+  /* Dark vignette — strong center clear, edges very dark */
+  .pp-timeline-bg::before {
+    content: ''; position: absolute; inset: 0; z-index: 10;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 28%, transparent 0%, rgba(0,0,0,0.5) 100%),
+      linear-gradient(to bottom,
+        rgba(0,0,0,0.88) 0%,
+        rgba(0,0,0,0.25) 30%,
+        rgba(0,0,0,0.35) 60%,
+        rgba(0,0,0,0.96) 100%
+      );
+  }
+
+  /* ── FLOATING EFFECTS PRESETS PANEL (top-right) ── */
+  .pp-effects-panel {
+    position: absolute; top: 64px; right: 18px; width: 170px; z-index: 6;
+    background: rgba(14,14,18,0.82);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    animation: panelFadeIn 2s ease forwards;
+  }
+  @keyframes panelFadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .pp-effects-header {
+    background: rgba(255,255,255,0.04); padding: 6px 10px;
+    font-family: 'SF Mono',monospace; font-size: 8px; font-weight:700;
+    color: rgba(255,255,255,0.5); letter-spacing:1px; text-transform:uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items:center; gap:6px;
+  }
+  .pp-effects-header::before { content:'⬡'; color:#9B59B6; font-size:10px; }
+  .pp-effect-category {
+    padding: 5px 10px 3px;
+    font-family: 'SF Mono',monospace; font-size: 7px; font-weight:700;
+    color: rgba(255,165,0,0.7); letter-spacing:0.8px; text-transform:uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .pp-effect-item {
+    padding: 4px 10px 4px 18px; font-family:'SF Mono',monospace;
+    font-size: 7.5px; color: rgba(255,255,255,0.45);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    display:flex; align-items:center; gap:6px;
+    transition: background 0.2s;
+  }
+  .pp-effect-item::before { content:'○'; font-size:7px; color:rgba(255,255,255,0.2); }
+  .pp-effect-item.active { background:rgba(41,151,255,0.08); color:rgba(160,210,255,0.9); }
+  .pp-effect-item.active::before { content:'●'; color:#2997FF; }
+
+  /* ── FLOATING SOURCE MONITOR (top-left) ── */
+  .pp-source-monitor {
+    position: absolute; top: 64px; left: 18px; width: 200px; z-index: 6;
+    background: rgba(14,14,18,0.85);
+    border: 1px solid rgba(255,255,255,0.07); border-radius:8px; overflow:hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    animation: panelFadeIn 2.2s ease forwards;
+  }
+  .pp-monitor-screen {
+    width:100%; aspect-ratio:16/9; background:#000;
+    position:relative; overflow:hidden;
+  }
+  .pp-monitor-screen canvas { width:100%; height:100%; display:block; }
+  .pp-monitor-bar {
+    background: rgba(10,10,14,0.95); padding:5px 8px;
+    display:flex; align-items:center; gap:6px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .pp-monitor-label {
+    font-family:'SF Mono',monospace; font-size:7px;
+    color:rgba(255,255,255,0.4); flex:1;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .pp-monitor-tc {
+    font-family:'SF Mono',monospace; font-size:8px; font-weight:700;
+    color:#2997FF; letter-spacing:1px;
+  }
+
+  /* ── LUMETRI SCOPES PANEL ── */
+  .pp-scopes {
+    position: absolute; top: 64px; left: 236px; width: 130px; z-index: 6;
+    background: rgba(14,14,18,0.82); border: 1px solid rgba(255,255,255,0.07);
+    border-radius:8px; overflow:hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    animation: panelFadeIn 2.4s ease forwards;
+  }
+  .pp-scopes-header {
+    background: rgba(255,255,255,0.04); padding:5px 8px;
+    font-family:'SF Mono',monospace; font-size:7px; font-weight:700;
+    color:rgba(255,255,255,0.4); letter-spacing:1px; text-transform:uppercase;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .pp-scope-canvas { display:block; width:100%; }
+
+  /* ── MAIN TIMELINE PANEL ── */
+  .pp-panel {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 310px;
+    background: linear-gradient(180deg,
+      rgba(20,20,24,0) 0%,
+      rgba(18,18,22,0.93) 8%,
+      rgba(15,15,19,0.98) 100%
+    );
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-direction: column;
+  }
+
+  /* Toolbar row */
+  .pp-toolbar {
+    height: 32px; background: rgba(12,12,16,0.96);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; padding: 0 12px; gap: 8px; flex-shrink:0;
+  }
+  .pp-toolbar-btn {
+    width:22px; height:22px; border-radius:4px;
+    background: rgba(255,255,255,0.07);
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; color:rgba(255,255,255,0.4);
+  }
+  .pp-toolbar-btn.active { background:rgba(41,151,255,0.2); color:#2997FF; }
+  .pp-toolbar-sep { width:1px; height:16px; background:rgba(255,255,255,0.07); margin:0 2px; }
+  .pp-timecode {
+    margin-left:auto;
+    font-family:'SF Mono',monospace; font-size:12px; font-weight:700;
+    color:#FF6B35; letter-spacing:2px;
+    text-shadow:0 0 12px rgba(255,107,53,0.5);
+  }
+  .pp-fps-label {
+    font-family:'SF Mono',monospace; font-size:9px;
+    color:rgba(255,255,255,0.25); margin-left:8px;
+  }
+
+  /* Timecode ruler */
+  .pp-ruler {
+    height: 20px; background: rgba(10,10,14,0.98);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items:stretch; flex-shrink:0;
+    overflow:hidden; position:relative;
+  }
+  .pp-ruler-track-spacer { width:82px; flex-shrink:0; border-right:1px solid rgba(255,255,255,0.08); }
+  .pp-ruler-ticks { flex:1; position:relative; overflow:hidden; }
+  .pp-ruler-ticks canvas { display:block; width:100%; height:100%; }
+
+  /* Playhead */
+  .pp-playhead {
+    position: absolute; top: 20px; width: 2px; height: calc(100% - 20px);
+    background: linear-gradient(180deg,#FF6B35 0%,rgba(255,107,53,0.15) 100%);
+    z-index: 8; pointer-events: none;
+    animation: playheadMove 12s cubic-bezier(0.4,0,0.6,1) infinite;
+  }
+  .pp-playhead::before {
+    content:'▼'; position:absolute; top:-14px; left:-5px;
+    font-size:9px; color:#FF6B35;
+    text-shadow:0 0 6px rgba(255,107,53,0.8);
+  }
+  .pp-playhead::after {
+    content:''; position:absolute; top:0; left:-6px; width:14px; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,107,53,0.04), transparent);
+  }
+  @keyframes playheadMove {
+    0%   { left: 82px; }
+    45%  { left: calc(95% + 82px); }
+    50%  { left: calc(95% + 82px); }
+    100% { left: 82px; }
+  }
+
+  /* Track area */
+  .pp-track-area {
+    flex:1; display:flex; overflow:hidden;
+  }
+  .pp-track-headers {
+    width:82px; flex-shrink:0;
+    background:rgba(12,12,16,0.97);
+    border-right:1px solid rgba(255,255,255,0.07);
+    display:flex; flex-direction:column; gap:2px; padding:4px 0;
+    overflow:hidden;
+  }
+  .pp-track-header {
+    height:26px; flex-shrink:0;
+    display:flex; align-items:center; padding:0 6px; gap:4px;
+  }
+  .pp-track-header-eye {
+    width:10px; height:10px; border-radius:50%;
+    background:rgba(255,255,255,0.1); flex-shrink:0;
+    font-size:7px; display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.4);
+  }
+  .pp-track-header-eye.on { background:rgba(255,255,100,0.15); color:rgba(255,255,100,0.7); }
+  .pp-track-header-name {
+    font-family:'SF Mono',monospace; font-size:7px;
+    color:rgba(255,255,255,0.35); white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; flex:1;
+  }
+  .pp-track-header-lock {
+    font-size:7px; color:rgba(255,255,255,0.15);
+  }
+
+  /* Track lanes */
+  .pp-tracks { flex:1; display:flex; flex-direction:column; gap:2px; padding:4px 4px; overflow:hidden; }
+  .pp-track {
+    height:26px; flex-shrink:0; position:relative;
+    border-radius:2px; background:rgba(255,255,255,0.015);
+    overflow:hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  /* Clip base */
+  .pp-clip {
+    position: absolute; top:1px; height:calc(100% - 2px);
+    border-radius:3px;
+    display:flex; align-items:center; padding:0 7px;
+    font-family:'SF Mono',monospace; font-size:6.5px; font-weight:700;
+    letter-spacing:0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    border-top:1px solid rgba(255,255,255,0.18);
+    border-left:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Clip colour schemes */
+  .c-purple { background:linear-gradient(135deg,rgba(75,35,150,0.9),rgba(105,60,195,0.75)); color:rgba(210,185,255,0.9); }
+  .c-blue   { background:linear-gradient(135deg,rgba(30,75,165,0.9),rgba(50,110,215,0.75)); color:rgba(160,205,255,0.9); }
+  .c-teal   { background:linear-gradient(135deg,rgba(15,85,75,0.9),rgba(25,125,105,0.75)); color:rgba(120,235,205,0.9); }
+  .c-green  { background:linear-gradient(135deg,rgba(20,100,40,0.9),rgba(35,145,60,0.75)); color:rgba(140,240,160,0.9); }
+  .c-amber  { background:linear-gradient(135deg,rgba(130,65,0,0.9),rgba(190,95,0,0.75)); color:rgba(255,200,100,0.9); }
+  .c-red    { background:linear-gradient(135deg,rgba(140,25,25,0.75),rgba(195,40,40,0.55)); color:rgba(255,155,155,0.9); }
+  .c-pink   { background:linear-gradient(135deg,rgba(130,25,100,0.75),rgba(185,40,140,0.55)); color:rgba(255,160,230,0.9); }
+  .c-slate  { background:linear-gradient(135deg,rgba(40,50,70,0.85),rgba(60,75,105,0.7)); color:rgba(175,195,235,0.9); }
+
+  /* Cross-dissolve / transition diamond */
+  .pp-xdissolve {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; z-index:3;
+    background:rgba(255,255,255,0.18);
+    clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  }
+  /* Dip-to-black bar */
+  .pp-dip {
+    position:absolute; top:0; width:10px; height:100%; z-index:3;
+    background:linear-gradient(90deg, transparent, rgba(0,0,0,0.7), transparent);
+  }
+  /* Motion blur transition */
+  .pp-mblur {
+    position:absolute; top:0; width:16px; height:100%; z-index:3;
+    background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    filter:blur(2px);
+  }
+
+  /* Audio waveform */
+  .pp-wave-canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+  /* Keyframe diamond on clips */
+  .pp-kf {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:6px; height:6px; z-index:4;
+    background:#FFD700;
+    clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  }
+
+  /* ── TICKER: scrolling effects & presets ── */
+  .pp-fx-ticker {
+    position:absolute; bottom:310px; left:0; right:0; height:22px;
+    background:rgba(10,10,14,0.85); border-top:1px solid rgba(255,255,255,0.05);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden; display:flex; align-items:center;
+  }
+  .pp-fx-ticker-inner {
+    display:flex; align-items:center; gap:0; white-space:nowrap;
+    animation: fxScroll 30s linear infinite;
+    font-family:'SF Mono',monospace; font-size:7.5px; color:rgba(255,255,255,0.3);
+  }
+  @keyframes fxScroll {
+    0%   { transform:translateX(0); }
+    100% { transform:translateX(-50%); }
+  }
+  .pp-fx-chip {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:2px 12px; border-right:1px solid rgba(255,255,255,0.05);
+  }
+  .pp-fx-chip .dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+  .dot-purple { background:#9B59B6; }
+  .dot-blue   { background:#2997FF; }
+  .dot-green  { background:#27AE60; }
+  .dot-amber  { background:#F39C12; }
+  .dot-red    { background:#E74C3C; }
+  .dot-cyan   { background:#1ABC9C; }
+
+  /* scrolling animation for tracks */
+  @keyframes trackScroll {
+    0%   { transform:translateX(0); }
+    40%  { transform:translateX(-18%); }
+    60%  { transform:translateX(-18%); }
+    100% { transform:translateX(0); }
+  }
+  .pp-track-scroll { animation: trackScroll 22s ease-in-out infinite; width:160%; }
+
+  /* === APPLE GLASS UI ANIMATIONS FOR CARDS === */
+
+  .video-card,
+  .cert-card,
+  .price-card {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(22, 22, 26, 0.72) !important;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.4),
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(255,255,255,0.06);
+    transition: 
+      transform 0.4s cubic-bezier(0.25,1,0.5,1),
+      box-shadow 0.4s ease,
+      border-color 0.4s ease !important;
+  }
+
+  .video-card:hover,
+  .cert-card:hover,
+  .price-card:hover {
+    box-shadow: 
+      0 20px 60px rgba(0,0,0,0.6),
+      0 1px 0 rgba(255,255,255,0.1) inset,
+      0 0 0 1px rgba(255,255,255,0.12),
+      0 0 40px rgba(41,151,255,0.08) !important;
+    transform: translateY(-6px) scale(1.01) !important;
+  }
+
+  .video-card::after,
+  .price-card::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.04) 40%,
+      rgba(255,255,255,0.08) 50%,
+      rgba(255,255,255,0.04) 60%,
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 200%;
+    background-position: -100% -100%;
+    transition: background-position 0.6s ease;
+    pointer-events: none; z-index: 0;
+  }
+  .video-card:hover::after,
+  .price-card:hover::after {
+    background-position: 200% 200%;
+  }
+
+  .hero-pill {
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    background: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.08) inset;
+    animation: pillFloat 4s ease-in-out infinite;
+  }
+  @keyframes pillFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-4px); }
+  }
+
+  .apple-btn {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative; overflow: hidden;
+  }
+  .apple-btn::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.5s ease;
+  }
+  .apple-btn:hover::before { left: 140%; }
+
+  .profile-image-wrapper {
+    box-shadow: 
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 24px 48px rgba(0,0,0,0.5),
+      0 0 80px rgba(41,151,255,0.06);
+  }
+
+  .tool-item {
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.04) !important;
+    transition: all 0.3s ease;
+  }
+  .tool-item:hover {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.15) !important;
+    transform: translateY(-2px);
+  }
+
+  .section-tag {
+    text-shadow: 0 0 20px rgba(41,151,255,0.5);
+  }
+
+  .price-card.featured {
+    background: rgba(30,35,55,0.8) !important;
+    backdrop-filter: blur(24px) saturate(200%);
+    box-shadow: 
+      0 30px 80px rgba(0,0,0,0.6),
+      0 0 60px rgba(41,151,255,0.12),
+      0 1px 0 rgba(100,160,255,0.15) inset !important;
+  }
+
   /* Premium SaaS Fixed Header Navigation */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -228,6 +644,302 @@
   <div class="blur-orb orb-2"></div>
 </div>
 
+<!-- BG CANVAS — animated colour-grading scene -->
+<canvas id="bg-edit-canvas"></canvas>
+
+<!-- PREMIERE PRO EDITING ENVIRONMENT BACKGROUND -->
+<div class="pp-timeline-bg" aria-hidden="true">
+
+  <!-- ── FLOATING SOURCE MONITOR ── -->
+  <div class="pp-source-monitor">
+    <div class="pp-monitor-screen">
+      <canvas id="monitorCanvas" width="200" height="112"></canvas>
+    </div>
+    <div class="pp-monitor-bar">
+      <div class="pp-monitor-label">HERO_SHOT_FINAL_v3.mp4</div>
+      <div class="pp-monitor-tc" id="monitorTc">00:00:14:08</div>
+    </div>
+  </div>
+
+  <!-- ── LUMETRI SCOPES ── -->
+  <div class="pp-scopes">
+    <div class="pp-scopes-header">Lumetri Scopes</div>
+    <canvas id="scopeCanvas" class="pp-scope-canvas" width="130" height="110"></canvas>
+  </div>
+
+  <!-- ── EFFECTS PRESETS PANEL ── -->
+  <div class="pp-effects-panel">
+    <div class="pp-effects-header">Effects &amp; Presets</div>
+    <div class="pp-effect-category">▸ Video Effects</div>
+    <div class="pp-effect-item active">Lumetri Color</div>
+    <div class="pp-effect-item active">Gaussian Blur</div>
+    <div class="pp-effect-item">Sharpen</div>
+    <div class="pp-effect-item">Warp Stabilizer</div>
+    <div class="pp-effect-item">Unsharp Mask</div>
+    <div class="pp-effect-category">▸ Transitions</div>
+    <div class="pp-effect-item active">Cross Dissolve</div>
+    <div class="pp-effect-item">Dip to Black</div>
+    <div class="pp-effect-item active">Film Dissolve</div>
+    <div class="pp-effect-item">Push</div>
+    <div class="pp-effect-item">Slide</div>
+    <div class="pp-effect-item">Zoom</div>
+    <div class="pp-effect-category">▸ Audio Effects</div>
+    <div class="pp-effect-item active">Parametric EQ</div>
+    <div class="pp-effect-item active">Dynamics</div>
+    <div class="pp-effect-item">DeNoise</div>
+    <div class="pp-effect-item">Reverb</div>
+    <div class="pp-effect-category">▸ Presets</div>
+    <div class="pp-effect-item">Cinematic LUT</div>
+    <div class="pp-effect-item active">Bleach Bypass</div>
+    <div class="pp-effect-item">Teal &amp; Orange</div>
+    <div class="pp-effect-item">Matte Look</div>
+  </div>
+
+  <!-- ── FX TICKER STRIP ── -->
+  <div class="pp-fx-ticker">
+    <div class="pp-fx-ticker-inner">
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Cross Dissolve</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lumetri Color · Exposure +0.4</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Parametric EQ · Bass Boost</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
+      <!-- duplicate for seamless scroll -->
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Cross Dissolve</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lumetri Color · Exposure +0.4</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Parametric EQ · Bass Boost</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
+    </div>
+  </div>
+
+  <!-- ── MAIN TIMELINE PANEL ── -->
+  <div class="pp-panel">
+
+    <!-- Toolbar -->
+    <div class="pp-toolbar">
+      <div class="pp-toolbar-btn">◀◀</div>
+      <div class="pp-toolbar-btn active">▶</div>
+      <div class="pp-toolbar-btn">▶▶</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn active">✂</div>
+      <div class="pp-toolbar-btn">↑</div>
+      <div class="pp-toolbar-btn">⊞</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn">🔗</div>
+      <div class="pp-toolbar-btn">M</div>
+      <div class="pp-toolbar-btn active">S</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn">⊡</div>
+      <div class="pp-toolbar-btn">≡</div>
+      <div class="pp-timecode" id="ppTimecode">00:00:00:00</div>
+      <div class="pp-fps-label">24.00 fps · 1920×1080</div>
+    </div>
+
+    <!-- Ruler + playhead -->
+    <div class="pp-ruler">
+      <div class="pp-ruler-track-spacer"></div>
+      <div class="pp-ruler-ticks">
+        <canvas id="rulerCanvas"></canvas>
+      </div>
+      <div class="pp-playhead" id="ppPlayhead"></div>
+    </div>
+
+    <!-- Track area -->
+    <div class="pp-track-area">
+
+      <!-- Track Headers -->
+      <div class="pp-track-headers">
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">FX · Adj</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V3 · Title</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V2 · B-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V1 · A-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A1 · Music</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A2 · VO</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye">👁</div>
+          <div class="pp-track-header-name">A3 · SFX</div>
+          <div class="pp-track-header-lock">🔒</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">Sub · CC</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+      </div>
+
+      <!-- Track Lanes -->
+      <div class="pp-tracks">
+
+        <!-- FX / Adjustment Layer -->
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-red" style="left:0%;width:100%;">Adjustment Layer · Lumetri Color · Bleach Bypass · Film Grain</div>
+            <div class="pp-kf" style="left:12%"></div>
+            <div class="pp-kf" style="left:35%"></div>
+            <div class="pp-kf" style="left:58%"></div>
+            <div class="pp-kf" style="left:82%"></div>
+          </div>
+        </div>
+
+        <!-- V3 — Titles / Graphics -->
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-pink" style="left:0%;width:18%;">Lower Third · Name</div>
+            <div class="pp-clip c-pink" style="left:20%;width:12%;">Title Card</div>
+            <div class="pp-clip c-slate" style="left:35%;width:22%;">Motion Graphic · SaaS Logo</div>
+            <div class="pp-clip c-pink" style="left:60%;width:10%;">End Screen</div>
+            <div class="pp-clip c-slate" style="left:73%;width:20%;">Subtitle · Dynamic Text</div>
+            <div class="pp-xdissolve" style="left:32.5%"></div>
+            <div class="pp-xdissolve" style="left:57.5%"></div>
+          </div>
+        </div>
+
+        <!-- V2 — B-Roll -->
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-teal" style="left:0%;width:15%;">B-Roll_Desk.mp4</div>
+            <div class="pp-clip c-teal" style="left:17%;width:22%;">CutAway_SaaS_Demo.mp4</div>
+            <div class="pp-clip c-teal" style="left:41%;width:13%;">Insert_Screen.mp4</div>
+            <div class="pp-clip c-teal" style="left:56%;width:18%;">BTS_Studio_RAW.mp4</div>
+            <div class="pp-clip c-teal" style="left:76%;width:17%;">Drone_Aerial_4K.mp4</div>
+            <div class="pp-dip"   style="left:15%"></div>
+            <div class="pp-dip"   style="left:39%"></div>
+            <div class="pp-mblur" style="left:54%"></div>
+            <div class="pp-dip"   style="left:74%"></div>
+            <div class="pp-kf" style="left:8%"></div>
+            <div class="pp-kf" style="left:28%"></div>
+            <div class="pp-kf" style="left:65%"></div>
+          </div>
+        </div>
+
+        <!-- V1 — A-Roll -->
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-purple" style="left:0%;width:20%;">INTERVIEW_A_ROLL_01.mp4</div>
+            <div class="pp-clip c-blue"   style="left:22%;width:18%;">WALK_TALK_SHOT.mp4</div>
+            <div class="pp-clip c-purple" style="left:42%;width:26%;">HERO_SHOT_FINAL_v3.mp4</div>
+            <div class="pp-clip c-blue"   style="left:70%;width:15%;">REACTION_CUT.mp4</div>
+            <div class="pp-clip c-purple" style="left:87%;width:12%;">OUTRO_SEQ.mp4</div>
+            <div class="pp-xdissolve" style="left:20%"></div>
+            <div class="pp-mblur"     style="left:40%"></div>
+            <div class="pp-xdissolve" style="left:68%"></div>
+            <div class="pp-dip"       style="left:85%"></div>
+            <div class="pp-kf" style="left:5%"></div>
+            <div class="pp-kf" style="left:31%"></div>
+            <div class="pp-kf" style="left:55%"></div>
+            <div class="pp-kf" style="left:78%"></div>
+          </div>
+        </div>
+
+        <!-- A1 — Music -->
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-amber" style="left:0%;width:60%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1a"></canvas>
+            </div>
+            <div class="pp-clip c-amber" style="left:62%;width:37%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1b"></canvas>
+            </div>
+            <div class="pp-kf" style="left:10%"></div>
+            <div class="pp-kf" style="left:50%"></div>
+            <div class="pp-kf" style="left:90%"></div>
+          </div>
+        </div>
+
+        <!-- A2 — VO -->
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-green" style="left:0%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2a"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:20%;width:24%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2b"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:46%;width:32%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2c"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:80%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2d"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- A3 — SFX -->
+        <div class="pp-track" style="height:26px;">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-slate" style="left:5%;width:8%;">SFX_Whoosh</div>
+            <div class="pp-clip c-slate" style="left:19%;width:6%;">Impact</div>
+            <div class="pp-clip c-slate" style="left:33%;width:9%;">Transition_Air</div>
+            <div class="pp-clip c-slate" style="left:48%;width:7%;">SFX_Click</div>
+            <div class="pp-clip c-slate" style="left:61%;width:11%;">Ambient_Room</div>
+            <div class="pp-clip c-slate" style="left:79%;width:8%;">SFX_Riser</div>
+            <div class="pp-clip c-slate" style="left:91%;width:7%;">Swoosh</div>
+          </div>
+        </div>
+
+        <!-- Subtitles / CC -->
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-blue" style="left:0%;width:12%;font-size:6px;">CC: "Welcome to the edit..."</div>
+            <div class="pp-clip c-blue" style="left:14%;width:14%;font-size:6px;">CC: "Every frame matters..."</div>
+            <div class="pp-clip c-blue" style="left:30%;width:10%;font-size:6px;">CC: "Cinematic pacing..."</div>
+            <div class="pp-clip c-blue" style="left:42%;width:16%;font-size:6px;">CC: "Precision color grade..."</div>
+            <div class="pp-clip c-blue" style="left:60%;width:12%;font-size:6px;">CC: "SaaS motion design..."</div>
+            <div class="pp-clip c-blue" style="left:74%;width:14%;font-size:6px;">CC: "Frame-perfect delivery."</div>
+          </div>
+        </div>
+
+      </div><!-- .pp-tracks -->
+    </div><!-- .pp-track-area -->
+  </div><!-- .pp-panel -->
+</div><!-- .pp-timeline-bg -->
+
 <!-- TOP HEADER NAVIGATION -->
 <nav>
   <div class="nav-logo">Rama Sai Mohith Varma</div>
@@ -265,7 +977,6 @@
       <h3>The Post-Production Engine</h3>
       <p>I build custom timeline workflows backed by structural pacing curves, flawless scene balancing protocols, and specialized mastering mechanics. My pipeline integrates industry-leading software suites to output industry-standard digital products.</p>
       
-      <!-- Tools Deployment Dock -->
       <div style="font-size: 0.8rem; font-weight:600; color:var(--apple-text); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Production Ecosystem</div>
       <div class="tools-dock">
         <div class="tool-item">Premiere Pro</div>
@@ -346,7 +1057,6 @@
     <h2 class="section-title">Academic Architecture</h2>
     
     <div class="cert-grid">
-      <!-- Certification 1 (Reference Source: Screenshot 2026-06-14 at 12.47.01 AM.jpg) -->
       <div class="cert-card">
         <div>
           <div class="cert-issuer">Plan At B ✦ Academic Division</div>
@@ -359,7 +1069,6 @@
         </div>
       </div>
 
-      <!-- Certification 2 (Reference Source: Screenshot 2026-06-14 at 12.47.26 AM.jpg) -->
       <div class="cert-card">
         <div>
           <div class="cert-issuer">Plan At B ✦ Academic Division</div>
@@ -374,14 +1083,14 @@
     </div>
   </section>
 
-  <!-- SAAS STYLE PRICING MATRIX — RECALIBRATED FOR EXTENDED MARKET RATES -->
+  <!-- SAAS STYLE PRICING MATRIX -->
   <section id="pricing" class="reveal">
     <div class="section-tag">Investment Models</div>
     <h2 class="section-title">Reasonable Project Rates</h2>
     
     <div class="pricing-grid">
       
-      <!-- Tier 1: Per Video Short Form -->
+      <!-- Tier 1 -->
       <div class="price-card">
         <div class="price-tier">Short Form Reel</div>
         <div class="price-amount">₹1,999 <span>/ video</span></div>
@@ -396,7 +1105,7 @@
         <a href="#contact" class="price-btn btn-tier-standard">Select Reel Cut</a>
       </div>
 
-      <!-- Tier 2: Per Project Mid Form -->
+      <!-- Tier 2 -->
       <div class="price-card">
         <div class="price-tier">Mid-Form Asset</div>
         <div class="price-amount">₹4,499 <span>/ project</span></div>
@@ -411,7 +1120,7 @@
         <a href="#contact" class="price-btn btn-tier-standard">Order Project</a>
       </div>
 
-      <!-- Tier 3: Basic Retainer Package -->
+      <!-- Tier 3 -->
       <div class="price-card">
         <div class="price-tier">Basic Retainer</div>
         <div class="price-amount">₹14,999 <span>/ month</span></div>
@@ -426,7 +1135,7 @@
         <a href="#contact" class="price-btn btn-tier-standard">Secure Basic</a>
       </div>
 
-      <!-- Tier 4: Advance Package Matrix -->
+      <!-- Tier 4 -->
       <div class="price-card">
         <div class="price-tier">Advance Package</div>
         <div class="price-amount">₹29,999 <span>/ month</span></div>
@@ -441,7 +1150,7 @@
         <a href="#contact" class="price-btn btn-tier-standard">Upgrade to Advance</a>
       </div>
 
-      <!-- Tier 5: Premium Elite Growth Retainer Hub -->
+      <!-- Tier 5 -->
       <div class="price-card featured">
         <div class="price-tag-badge">Elite Tier</div>
         <div class="price-tier">Premium Growth Hub</div>
@@ -494,71 +1203,272 @@
 
 <!-- SYSTEM RUNTIME JAVASCRIPT ANIMATION HOOKS -->
 <script>
-  // 1. Apple-Style Smooth Viewport Intersection Observers
-  const structuralNodes = document.querySelectorAll('.reveal');
-  const transitionEngine = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.05 });
+  // ── 1. Intersection reveal
+  document.querySelectorAll('.reveal').forEach(el =>
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05 }).observe(el)
+  );
 
-  structuralNodes.forEach(node => transitionEngine.observe(node));
-
-  // 2. Continuous Inline Video Hover Activation Loop
-  const interactiveCards = document.querySelectorAll('.video-card');
-  interactiveCards.forEach(card => {
-    const assetVideo = card.querySelector('video');
-    
-    card.addEventListener('mouseenter', () => {
-      if(assetVideo) {
-        assetVideo.play().catch(() => {/* System multi-thread block protection */});
-      }
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      if(assetVideo) {
-        assetVideo.pause();
-        assetVideo.currentTime = 0;
-      }
-    });
+  // ── 2. Video card hover play
+  document.querySelectorAll('.video-card').forEach(card => {
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', () => vid && vid.play().catch(()=>{}));
+    card.addEventListener('mouseleave', () => { if(vid){ vid.pause(); vid.currentTime=0; } });
   });
 
-  // 3. Cinematic Frame Lightbox Controller Matrix
+  // ── 3. Lightbox
   const portalLightbox = document.getElementById('videoLightbox');
-  const enginePlayer = document.getElementById('lightboxVideo');
-  const textHeadline = document.getElementById('lightboxTitle');
-  const textParagraph = document.getElementById('lightboxDesc');
-  const dismissPortal = document.getElementById('lightboxDismiss');
+  const enginePlayer   = document.getElementById('lightboxVideo');
+  const textHeadline   = document.getElementById('lightboxTitle');
+  const textParagraph  = document.getElementById('lightboxDesc');
+  const dismissPortal  = document.getElementById('lightboxDismiss');
 
-  function deployLightbox(url, title, description) {
-    enginePlayer.src = url;
-    textHeadline.textContent = title;
-    textParagraph.textContent = description;
+  function deployLightbox(url,title,description){
+    enginePlayer.src=url; textHeadline.textContent=title; textParagraph.textContent=description;
     portalLightbox.classList.add('active');
-    enginePlayer.play().catch(e => console.log("Direct audio token approved by interactive gesture"));
+    enginePlayer.play().catch(()=>{});
   }
-
-  function collapseLightbox() {
+  function collapseLightbox(){
     portalLightbox.classList.remove('active');
-    enginePlayer.pause();
-    enginePlayer.src = "";
+    enginePlayer.pause(); enginePlayer.src='';
   }
-
-  interactiveCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const dynamicUrl = card.getAttribute('data-video');
-      const dynamicTitle = card.getAttribute('data-title');
-      const dynamicDesc = card.getAttribute('data-desc');
-      deployLightbox(dynamicUrl, dynamicTitle, dynamicDesc);
-    });
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', () =>
+      deployLightbox(card.dataset.video, card.dataset.title, card.dataset.desc)
+    );
   });
-
   dismissPortal.addEventListener('click', collapseLightbox);
-  portalLightbox.addEventListener('click', (event) => {
-    if (event.target === portalLightbox) collapseLightbox();
-  });
+  portalLightbox.addEventListener('click', e => { if(e.target===portalLightbox) collapseLightbox(); });
+
+  // ═══════════════════════════════════════════════
+  //  4. PREMIERE PRO CANVAS ANIMATIONS
+  // ═══════════════════════════════════════════════
+
+  // ── Live timecode
+  const timecodeEl = document.getElementById('ppTimecode');
+  const monitorTcEl = document.getElementById('monitorTc');
+  let frames = 0;
+  const FPS = 24;
+  setInterval(()=>{
+    frames++;
+    const s = Math.floor(frames/FPS) % 60;
+    const m = Math.floor(frames/(FPS*60)) % 60;
+    const h = Math.floor(frames/(FPS*3600)) % 24;
+    const f = frames % FPS;
+    const tc = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(f).padStart(2,'0')}`;
+    if(timecodeEl) timecodeEl.textContent = tc;
+    if(monitorTcEl) {
+      const mf = (frames + 200) % (FPS * 60 * 10);
+      const ms2 = Math.floor(mf/FPS) % 60;
+      const mm  = Math.floor(mf/(FPS*60)) % 60;
+      monitorTcEl.textContent = `00:${String(mm).padStart(2,'0')}:${String(ms2).padStart(2,'0')}:${String(mf%FPS).padStart(2,'0')}`;
+    }
+  }, 1000/FPS);
+
+  // ── Ruler canvas
+  function drawRuler(){
+    const canvas = document.getElementById('rulerCanvas');
+    if(!canvas) return;
+    const w = canvas.parentElement.offsetWidth;
+    const h = 20;
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = 'rgba(10,10,14,0.98)';
+    ctx.fillRect(0,0,w,h);
+    const secWidth = w / 60;
+    for(let s=0; s<=60; s++){
+      const x = s * secWidth;
+      const isMajor = s % 5 === 0;
+      ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x,isMajor?0:10); ctx.lineTo(x,h); ctx.stroke();
+      if(isMajor && s>0){
+        const mins = Math.floor(s/60);
+        const secs = s%60;
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '7px SF Mono, Courier New, monospace';
+        ctx.fillText(`${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}:00`, x+2, h-3);
+      }
+    }
+  }
+  drawRuler();
+  window.addEventListener('resize', drawRuler);
+
+  // ── Source monitor canvas
+  (function monitorLoop(){
+    const canvas = document.getElementById('monitorCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W=200, H=112;
+    canvas.width=W; canvas.height=H;
+    let t=0;
+    function draw(){
+      t += 0.008;
+      const grad = ctx.createLinearGradient(0,0,W,H);
+      const r = Math.floor(60 + 30*Math.sin(t));
+      const g = Math.floor(100 + 40*Math.sin(t*0.7+1));
+      const b = Math.floor(140 + 50*Math.cos(t*0.5+2));
+      grad.addColorStop(0, `rgb(${r},${g},${b})`);
+      grad.addColorStop(0.5,`rgb(${Math.floor(r*0.6)},${Math.floor(g*0.8)},${Math.floor(b*1.1)})`);
+      grad.addColorStop(1, `rgb(${Math.floor(r*1.2)},${Math.floor(g*0.5)},${Math.floor(b*0.6)})`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
+
+      const imgd = ctx.getImageData(0,0,W,H);
+      const pix = imgd.data;
+      for(let i=0;i<pix.length;i+=4){
+        const n=(Math.random()-0.5)*18;
+        pix[i]+=n; pix[i+1]+=n; pix[i+2]+=n;
+      }
+      ctx.putImageData(imgd,0,0);
+
+      ctx.fillStyle='#000';
+      ctx.fillRect(0,0,W,10);
+      ctx.fillRect(0,H-10,W,10);
+
+      ctx.strokeStyle='rgba(255,255,255,0.12)';
+      ctx.lineWidth=0.5;
+      ctx.strokeRect(10,14,W-20,H-28);
+
+      ctx.strokeStyle='rgba(255,255,255,0.15)';
+      ctx.beginPath(); ctx.moveTo(W/2-8,H/2); ctx.lineTo(W/2+8,H/2);
+      ctx.moveTo(W/2,H/2-8); ctx.lineTo(W/2,H/2+8); ctx.stroke();
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── Lumetri Scopes
+  (function scopeLoop(){
+    const canvas = document.getElementById('scopeCanvas');
+    if(!canvas) return;
+    const W=130, H=110;
+    canvas.width=W; canvas.height=H;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    function draw(){
+      t+=0.03;
+      ctx.fillStyle='rgba(5,5,8,0.9)';
+      ctx.fillRect(0,0,W,H);
+
+      const mid = H/2 - 8;
+      ctx.strokeStyle='rgba(0,255,80,0.6)';
+      ctx.lineWidth=0.8;
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.4*Math.sin(x*0.08+t) + 0.3*Math.sin(x*0.18+t*1.3) + 0.2*Math.sin(x*0.04+t*0.7));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,80,0,0.5)';
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.35*Math.cos(x*0.09+t*1.1) + 0.25*Math.sin(x*0.15+t*0.8));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,255,255,0.08)';
+      ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(0,mid+10); ctx.lineTo(W,mid+10); ctx.stroke();
+
+      const cx=W/2, cy=(H+mid+10)/2, cr=20;
+      ctx.strokeStyle='rgba(255,255,255,0.06)';
+      ctx.lineWidth=0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,cr,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,cr*0.66,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle='rgba(0,255,80,0.5)';
+      for(let i=0;i<40;i++){
+        const a = (i/40)*Math.PI*2 + t*0.2;
+        const r2 = cr*(0.3+0.5*Math.abs(Math.sin(i*0.7+t)));
+        const px=cx+r2*Math.cos(a), py=cy+r2*Math.sin(a);
+        ctx.beginPath(); ctx.arc(px,py,1,0,Math.PI*2); ctx.fill();
+      }
+
+      ctx.fillStyle='rgba(255,255,255,0.25)';
+      ctx.font='6px SF Mono, monospace';
+      ctx.fillText('WAVEFORM',2,8);
+      ctx.fillText('VECTOR',2,mid+18);
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── Background canvas scene
+  (function bgLoop(){
+    const canvas = document.getElementById('bg-edit-canvas');
+    if(!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    window.addEventListener('resize',()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    });
+    function draw(){
+      t+=0.004;
+      const W=canvas.width, H=canvas.height;
+      const bg = ctx.createRadialGradient(W*0.3,H*0.4,0,W*0.5,H*0.5,W*0.8);
+      bg.addColorStop(0, `hsl(${220+20*Math.sin(t)},40%,12%)`);
+      bg.addColorStop(0.5,`hsl(${200+15*Math.cos(t*0.7)},30%,7%)`);
+      bg.addColorStop(1, `hsl(${180+10*Math.sin(t*0.4)},20%,3%)`);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      for(let i=0;i<3;i++){
+        const angle = Math.PI*0.3 + i*0.3 + Math.sin(t*0.5+i)*0.05;
+        const x = W*(0.2+i*0.3);
+        const grad2 = ctx.createLinearGradient(x,0,x+Math.cos(angle)*W*0.6, Math.sin(angle)*H*0.8);
+        grad2.addColorStop(0,`rgba(41,151,255,0.02)`);
+        grad2.addColorStop(1,'transparent');
+        ctx.fillStyle=grad2;
+        ctx.save();
+        ctx.translate(x,0);
+        ctx.rotate(angle - Math.PI/2);
+        ctx.fillRect(-60,0,120,W);
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── Waveform clips
+  function animateWaveCanvas(id, colorR, colorG, colorB, seed){
+    const c = document.getElementById(id);
+    if(!c) return;
+    const ctx = c.getContext('2d');
+    let t=seed||0;
+    function draw(){
+      t+=0.04;
+      const W=c.offsetWidth||100, H=c.offsetHeight||26;
+      c.width=W; c.height=H;
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle=`rgba(${colorR},${colorG},${colorB},0.7)`;
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      const mid=H/2;
+      for(let x=0;x<W;x++){
+        const v = mid * (0.5*Math.sin(x*0.15+t) + 0.3*Math.sin(x*0.3+t*1.5+seed) + 0.15*Math.cos(x*0.08+t*0.6));
+        x===0 ? ctx.moveTo(x, mid+v) : ctx.lineTo(x, mid+v);
+      }
+      ctx.stroke();
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+  animateWaveCanvas('waveA1a',255,180,50,0);
+  animateWaveCanvas('waveA1b',255,180,50,1.5);
+  animateWaveCanvas('waveA2a',80,220,120,0.8);
+  animateWaveCanvas('waveA2b',80,220,120,2.1);
+  animateWaveCanvas('waveA2c',80,220,120,3.4);
+  animateWaveCanvas('waveA2d',80,220,120,0.3);
 </script>
 </body>
 </html>
