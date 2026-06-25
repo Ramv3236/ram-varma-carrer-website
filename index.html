@@ -170,7 +170,7 @@
     color:#FF6B35; letter-spacing:2px;
     text-shadow:0 0 12px rgba(255,107,53,0.5);
   }
-  .pp-focus-label {
+  .pp-fps-label {
     font-family:'SF Mono',monospace; font-size:9px;
     color:rgba(255,255,255,0.25); margin-left:8px;
   }
@@ -560,35 +560,6 @@
   .btn-tier-featured { background: var(--apple-accent); color: #FFF; }
   .btn-tier-featured:hover { opacity: 0.9; }
 
-  /* ── Contact Matrix Wrapper ── */
-  .contact-matrix-box {
-    background: var(--apple-card); border: 1px solid var(--apple-border); border-radius: 24px;
-    padding: 64px 40px; text-align: center; position: relative; overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-  }
-  .contact-links-grid {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
-    margin: 32px auto 0 auto; max-width: 800px; position: relative; z-index: 5;
-  }
-  .contact-item-pill {
-    background: rgba(255,255,255,0.03); border: 1px solid var(--apple-border);
-    padding: 12px 24px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px;
-    font-size: 0.88rem; color: var(--apple-text); text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(8px);
-  }
-  .contact-item-pill:hover {
-    background: rgba(41,151,255,0.1); border-color: var(--apple-accent);
-    color: #FFF; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(41,151,255,0.2);
-  }
-  .contact-item-pill span.icon { font-size: 1.1rem; }
-
-  /* ── Canvas 3D Dynamic Workspace ── */
-  .workspace-3d-wrapper {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 1; opacity: 0.22;
-  }
-  #workspaceCanvas { width: 100%; height: 100%; display: block; }
-
   .lightbox {
     position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.95);
     backdrop-filter: blur(25px); display: flex; align-items: center; justify-content: center;
@@ -627,8 +598,6 @@
     .cert-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     section { padding: 80px 0 20px 0; }
-    .contact-links-grid { flex-direction: column; align-items: center; gap: 14px; }
-    .contact-item-pill { width: 100%; max-width: 320px; justify-content: center; }
   }
 </style>
 </head>
@@ -642,6 +611,7 @@
 <canvas id="bg-edit-canvas"></canvas>
 
 <div class="pp-timeline-bg" aria-hidden="true">
+
   <div class="pp-source-monitor">
     <div class="pp-monitor-screen">
       <canvas id="monitorCanvas" width="200" height="112"></canvas>
@@ -669,9 +639,19 @@
     <div class="pp-effect-item active">Cross Dissolve</div>
     <div class="pp-effect-item">Dip to Black</div>
     <div class="pp-effect-item active">Film Dissolve</div>
+    <div class="pp-effect-item">Push</div>
+    <div class="pp-effect-item">Slide</div>
+    <div class="pp-effect-item">Zoom</div>
     <div class="pp-effect-category">▸ Audio Effects</div>
     <div class="pp-effect-item active">Parametric EQ</div>
     <div class="pp-effect-item active">Dynamics</div>
+    <div class="pp-effect-item">DeNoise</div>
+    <div class="pp-effect-item">Reverb</div>
+    <div class="pp-effect-category">▸ Presets</div>
+    <div class="pp-effect-item">Cinematic LUT</div>
+    <div class="pp-effect-item active">Bleach Bypass</div>
+    <div class="pp-effect-item">Teal &amp; Orange</div>
+    <div class="pp-effect-item">Matte Look</div>
   </div>
 
   <div class="pp-fx-ticker">
@@ -682,10 +662,37 @@
       <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
       <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
       <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Cross Dissolve</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lumetri Color · Exposure +0.4</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Parametric EQ · Bass Boost</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
     </div>
   </div>
 
   <div class="pp-panel">
+
     <div class="pp-toolbar">
       <div class="pp-toolbar-btn">◀◀</div>
       <div class="pp-toolbar-btn active">▶</div>
@@ -699,33 +706,178 @@
       <div class="pp-toolbar-btn">M</div>
       <div class="pp-toolbar-btn active">S</div>
       <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn">⊡</div>
+      <div class="pp-toolbar-btn">≡</div>
       <div class="pp-timecode" id="ppTimecode">00:00:00:00</div>
-      <div class="pp-focus-label">24.00 fps · 1920×1080</div>
+      <div class="pp-fps-label">24.00 fps · 1920×1080</div>
     </div>
 
     <div class="pp-ruler">
       <div class="pp-ruler-track-spacer"></div>
-      <div class="pp-ruler-ticks"><canvas id="rulerCanvas"></canvas></div>
+      <div class="pp-ruler-ticks">
+        <canvas id="rulerCanvas"></canvas>
+      </div>
       <div class="pp-playhead" id="ppPlayhead"></div>
     </div>
 
     <div class="pp-track-area">
+
       <div class="pp-track-headers">
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">FX · Adj</div></div>
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">V3 · Title</div></div>
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">V2 · B-Roll</div></div>
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">V1 · A-Roll</div></div>
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">A1 · Music</div></div>
-        <div class="pp-track-header"><div class="pp-track-header-eye on">👁</div><div class="pp-track-header-name">A2 · VO</div></div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">FX · Adj</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V3 · Title</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V2 · B-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V1 · A-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A1 · Music</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A2 · VO</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye">👁</div>
+          <div class="pp-track-header-name">A3 · SFX</div>
+          <div class="pp-track-header-lock">🔒</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">Sub · CC</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
       </div>
 
       <div class="pp-tracks">
-        <div class="pp-track"><div class="pp-track-scroll"><div class="pp-clip c-red" style="left:0%;width:100%;">Adjustment Layer · Lumetri Color · Bleach Bypass</div></div></div>
-        <div class="pp-track"><div class="pp-track-scroll"><div class="pp-clip c-pink" style="left:0%;width:18%;">Lower Third · Name</div><div class="pp-clip c-pink" style="left:20%;width:12%;">Title Card</div></div></div>
-        <div class="pp-track"><div class="pp-track-scroll"><div class="pp-clip c-teal" style="left:0%;width:15%;">B-Roll_Desk.mp4</div><div class="pp-clip c-teal" style="left:17%;width:22%;">CutAway_SaaS_Demo.mp4</div></div></div>
-        <div class="pp-track"><div class="pp-track-scroll"><div class="pp-clip c-purple" style="left:0%;width:20%;">INTERVIEW_A_ROLL_01.mp4</div><div class="pp-clip c-blue" style="left:22%;width:18%;">WALK_TALK_SHOT.mp4</div></div></div>
-        <div class="pp-track" style="height:32px;"><div class="pp-track-scroll" style="position:relative;height:100%;"><div class="pp-clip c-amber" style="left:0%;width:60%;overflow:hidden;"><canvas class="pp-wave-canvas" id="waveA1a"></canvas></div></div></div>
-        <div class="pp-track" style="height:32px;"><div class="pp-track-scroll" style="position:relative;height:100%;"><div class="pp-clip c-green" style="left:0%;width:18%;overflow:hidden;"><canvas class="pp-wave-canvas" id="waveA2a"></canvas></div></div></div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-red" style="left:0%;width:100%;">Adjustment Layer · Lumetri Color · Bleach Bypass · Film Grain</div>
+            <div class="pp-kf" style="left:12%"></div>
+            <div class="pp-kf" style="left:35%"></div>
+            <div class="pp-kf" style="left:58%"></div>
+            <div class="pp-kf" style="left:82%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-pink" style="left:0%;width:18%;">Lower Third · Name</div>
+            <div class="pp-clip c-pink" style="left:20%;width:12%;">Title Card</div>
+            <div class="pp-clip c-slate" style="left:35%;width:22%;">Motion Graphic · SaaS Logo</div>
+            <div class="pp-clip c-pink" style="left:60%;width:10%;">End Screen</div>
+            <div class="pp-clip c-slate" style="left:73%;width:20%;">Subtitle · Dynamic Text</div>
+            <div class="pp-xdissolve" style="left:32.5%"></div>
+            <div class="pp-xdissolve" style="left:57.5%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-teal" style="left:0%;width:15%;">B-Roll_Desk.mp4</div>
+            <div class="pp-clip c-teal" style="left:17%;width:22%;">CutAway_SaaS_Demo.mp4</div>
+            <div class="pp-clip c-teal" style="left:41%;width:13%;">Insert_Screen.mp4</div>
+            <div class="pp-clip c-teal" style="left:56%;width:18%;">BTS_Studio_RAW.mp4</div>
+            <div class="pp-clip c-teal" style="left:76%;width:17%;">Drone_Aerial_4K.mp4</div>
+            <div class="pp-dip"   style="left:15%"></div>
+            <div class="pp-dip"   style="left:39%"></div>
+            <div class="pp-mblur" style="left:54%"></div>
+            <div class="pp-dip"   style="left:74%"></div>
+            <div class="pp-kf" style="left:8%"></div>
+            <div class="pp-kf" style="left:28%"></div>
+            <div class="pp-kf" style="left:65%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-purple" style="left:0%;width:20%;">INTERVIEW_A_ROLL_01.mp4</div>
+            <div class="pp-clip c-blue"   style="left:22%;width:18%;">WALK_TALK_SHOT.mp4</div>
+            <div class="pp-clip c-purple" style="left:42%;width:26%;">HERO_SHOT_FINAL_v3.mp4</div>
+            <div class="pp-clip c-blue"   style="left:70%;width:15%;">REACTION_CUT.mp4</div>
+            <div class="pp-clip c-purple" style="left:87%;width:12%;">OUTRO_SEQ.mp4</div>
+            <div class="pp-xdissolve" style="left:20%"></div>
+            <div class="pp-mblur"     style="left:40%"></div>
+            <div class="pp-xdissolve" style="left:68%"></div>
+            <div class="pp-dip"       style="left:85%"></div>
+            <div class="pp-kf" style="left:5%"></div>
+            <div class="pp-kf" style="left:31%"></div>
+            <div class="pp-kf" style="left:55%"></div>
+            <div class="pp-kf" style="left:78%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-amber" style="left:0%;width:60%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1a"></canvas>
+            </div>
+            <div class="pp-clip c-amber" style="left:62%;width:37%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1b"></canvas>
+            </div>
+            <div class="pp-kf" style="left:10%"></div>
+            <div class="pp-kf" style="left:50%"></div>
+            <div class="pp-kf" style="left:90%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-green" style="left:0%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2a"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:20%;width:24%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2b"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:46%;width:32%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2c"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:80%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2d"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:26px;">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-slate" style="left:5%;width:8%;">SFX_Whoosh</div>
+            <div class="pp-clip c-slate" style="left:19%;width:6%;">Impact</div>
+            <div class="pp-clip c-slate" style="left:33%;width:9%;">Transition_Air</div>
+            <div class="pp-clip c-slate" style="left:48%;width:7%;">SFX_Click</div>
+            <div class="pp-clip c-slate" style="left:61%;width:11%;">Ambient_Room</div>
+            <div class="pp-clip c-slate" style="left:79%;width:8%;">SFX_Riser</div>
+            <div class="pp-clip c-slate" style="left:91%;width:7%;">Swoosh</div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-blue" style="left:0%;width:12%;font-size:6px;">CC: "Welcome to the edit..."</div>
+            <div class="pp-clip c-blue" style="left:14%;width:14%;font-size:6px;">CC: "Every frame matters..."</div>
+            <div class="pp-clip c-blue" style="left:30%;width:10%;font-size:6px;">CC: "Cinematic pacing..."</div>
+            <div class="pp-clip c-blue" style="left:42%;width:16%;font-size:6px;">CC: "Precision color grade..."</div>
+            <div class="pp-clip c-blue" style="left:60%;width:12%;font-size:6px;">CC: "SaaS motion design..."</div>
+            <div class="pp-clip c-blue" style="left:74%;width:14%;font-size:6px;">CC: "Frame-perfect delivery."</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -780,10 +932,17 @@
     <h2 class="section-title">Visual Deliverables</h2>
 
     <div class="video-grid">
-      <div class="video-card reveal" data-type="native" data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781285343/my_portfolio_edfit_xaqq7r.mp4" data-title="apple saas animation video edit of my portfolio" data-desc="Apple SaaS signature interface editing, utilizing slick timing components, micro-scale shifts, and clean color maps.">
+
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781285343/my_portfolio_edfit_xaqq7r.mp4" 
+           data-title="apple saas animation video edit of my portfolio" 
+           data-desc="Apple SaaS signature interface editing, utilizing slick timing components, micro-scale shifts, and clean color maps.">
         <div class="video-container">
           <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781285343/my_portfolio_edfit_xaqq7r.mp4" muted loop preload="metadata" playsinline></video>
-          <div class="play-indicator"><svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg></div>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
         </div>
         <div class="card-details">
           <div class="card-badge">SaaS Animation</div>
@@ -792,10 +951,16 @@
         </div>
       </div>
 
-      <div class="video-card reveal" data-type="native" data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286032/Comp_1_1_eevrqw.mp4" data-title="Basuri Production" data-desc="Cinematic timeline engineering layout featuring comprehensive atmospheric sound editing configurations and multi-point grading curves.">
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286032/Comp_1_1_eevrqw.mp4" 
+           data-title="Basuri Production" 
+           data-desc="Cinematic timeline engineering layout featuring comprehensive atmospheric sound editing configurations and multi-point grading curves.">
         <div class="video-container">
           <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286032/Comp_1_1_eevrqw.mp4" muted loop preload="metadata" playsinline></video>
-          <div class="play-indicator"><svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg></div>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
         </div>
         <div class="card-details">
           <div class="card-badge working">Project currently working</div>
@@ -804,10 +969,16 @@
         </div>
       </div>
 
-      <div class="video-card reveal" data-type="native" data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286329/0510_atds6k.mov" data-title="ai edited video sample" data-desc="Exploration combining neural frame interpretation variables along with manual core masking layouts for futuristic continuity.">
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286329/0510_atds6k.mov" 
+           data-title="ai edited video sample" 
+           data-desc="Exploration combining neural frame interpretation variables along with manual core masking layouts for futuristic continuity.">
         <div class="video-container">
           <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286329/0510_atds6k.mov" muted loop preload="metadata" playsinline></video>
-          <div class="play-indicator"><svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg></div>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
         </div>
         <div class="card-details">
           <div class="card-badge">AI Pipeline</div>
@@ -816,7 +987,10 @@
         </div>
       </div>
 
-      <div class="video-card reveal" data-type="embedded-frame" data-title="Jumpshare Master Showcase Reel" data-desc="Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.">
+      <div class="video-card reveal" 
+           data-type="embedded-frame"
+           data-title="Jumpshare Master Showcase Reel" 
+           data-desc="Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.">
         <div class="video-container">
           <iframe id="js_video_iframe" src="https://jumpshare.com/embed/fC7IpBiTUOnzq0NsCty4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
         </div>
@@ -826,12 +1000,14 @@
           <div class="card-description">Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.</div>
         </div>
       </div>
+
     </div>
   </section>
 
   <section id="certs" class="reveal">
     <div class="section-tag">Verified Credentials</div>
     <h2 class="section-title">Academic Architecture</h2>
+    
     <div class="cert-grid">
       <div class="cert-card">
         <div>
@@ -841,8 +1017,10 @@
         <div class="cert-meta">
           <p><strong>Syllabus Scope:</strong> Advanced timeline construction, sub-frame processing layout, and system output mastering.</p>
           <p style="margin-top:8px;"><strong>Credential ID:</strong> <span class="cert-id">#b5f9a617958fae76</span></p>
+          <p style="font-size:0.75rem; color:var(--apple-muted); margin-top:4px;">Issued by Karthik Raghavarapu • May 31, 2026</p>
         </div>
       </div>
+
       <div class="cert-card">
         <div>
           <div class="cert-issuer">Plan At B ✦ Academic Division</div>
@@ -851,6 +1029,7 @@
         <div class="cert-meta">
           <p><strong>Syllabus Scope:</strong> Multi-axis kinetic interpolation parameters, advanced canvas masking, and modern SaaS animation layouts.</p>
           <p style="margin-top:8px;"><strong>Credential ID:</strong> <span class="cert-id">#d2ffe8d9e6ad007b</span></p>
+          <p style="font-size:0.75rem; color:var(--apple-muted); margin-top:4px;">Issued by Karthik Raghavarapu • June 9, 2026</p>
         </div>
       </div>
     </div>
@@ -859,65 +1038,90 @@
   <section id="pricing" class="reveal">
     <div class="section-tag">Investment Models</div>
     <h2 class="section-title">Reasonable Project Rates</h2>
+    
     <div class="pricing-grid">
+      
       <div class="price-card">
         <div class="price-tier">Short Form Reel</div>
         <div class="price-amount">₹1,999 <span>/ video</span></div>
-        <p class="price-desc">Optimized for Instagram Reels, YouTube Shorts, or TikTok ads with rapid-cut pacing framework.</p>
+        <div class="price-desc">Optimized for Instagram Reels, YouTube Shorts, or TikTok ads with rapid-cut pacing framework.</div>
         <ul class="price-features-list">
           <li>Hook Pacing & Fluid Sequencing</li>
-          <li>Basic Dynamic Subtitles</li>
+          <li>Basic Dynamic Subtitles & Text Pop</li>
           <li>Sound Balancing & Noise Cut</li>
+          <li>Premiere Pro Workflow Mapping</li>
+          <li>1 Revision/Iteration Round</li>
         </ul>
         <a href="#contact" class="price-btn btn-tier-standard">Select Reel Cut</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Mid-Form Asset</div>
+        <div class="price-amount">₹4,499 <span>/ project</span></div>
+        <div class="price-desc">Tailored for 2 to 10 minute content maps: video essays, software vlogs, or brand overviews.</div>
+        <ul class="price-features-list">
+          <li>2–10 Min Extended Sequence Control</li>
+          <li>A-Roll / B-Roll Intersection Balance</li>
+          <li>Standard Color Curve Equalizer</li>
+          <li>Immersive Sound Design Layers</li>
+          <li>2 Detailed Revision Rounds</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Order Project</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Basic Retainer</div>
+        <div class="price-amount">₹14,999 <span>/ month</span></div>
+        <div class="price-desc">Steady, entry-level production pipeline scaling for consistent creators or brand pages.</div>
+        <ul class="price-features-list">
+          <li>Up to 6 High-Retention Video Cuts</li>
+          <li>Narrative Continuity Structural Tuning</li>
+          <li>DaVinci Resolve Color Grade Basic</li>
+          <li>Integrated Graphic & Subtitle Presets</li>
+          <li>Standard Email Support Comms</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Secure Basic</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Advance Package</div>
+        <div class="price-amount">₹29,999 <span>/ month</span></div>
+        <div class="price-desc">Elevated processing frameworks engineered for serious content strategy channels.</div>
+        <ul class="price-features-list">
+          <li>Up to 12 Advanced Cinematic Cutouts</li>
+          <li>After Effects Kinematics & Typography</li>
+          <li>Pro SFX Soundscapes & Foley Textures</li>
+          <li>Custom SaaS Motion Lower-Third Assets</li>
+          <li>Priority Timeline Queue Access</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Upgrade to Advance</a>
       </div>
 
       <div class="price-card featured">
         <div class="price-tag-badge">Elite Tier</div>
         <div class="price-tier">Premium Growth Hub</div>
         <div class="price-amount">₹65,000 <span>/ month</span></div>
-        <p class="price-desc">Complete end-to-end digital identity transformation. Complete hand-off handling paired with storytelling engineering.</p>
+        <div class="price-desc">Complete end-to-end digital identity transformation. Complete hand-off handling paired with storytelling engineering.</div>
         <ul class="price-features-list">
-          <li><strong>20 High-End Cinematic Videos</strong> / Mo</li>
-          <li><strong>Full Instagram Page Handling</strong></li>
-          <li>DaVinci Resolve Pro Grading</li>
-          <li>After Effects SaaS Animations</li>
+          <li><strong>20 High-End Cinematic Videos</strong> Per Month</li>
+          <li><strong>Full Instagram Page Handling</strong> & Strategy</li>
+          <li>Deep Script Hook & Storytelling Formats</li>
+          <li>DaVinci Resolve Pro Grading & LUT Tuning</li>
+          <li>After Effects SaaS Animations & Text Maps</li>
+          <li>Complete Sound Architecture Mastery Layers</li>
+          <li>Direct WhatsApp Strategy Feedback Loop</li>
         </ul>
         <a href="#contact" class="price-btn btn-tier-featured">Launch Ecosystem</a>
       </div>
+
     </div>
   </section>
 
   <section id="contact" class="reveal" style="padding-bottom: 120px;">
-    <div class="contact-matrix-box">
-      
-      <div class="workspace-3d-wrapper">
-        <canvas id="workspaceCanvas"></canvas>
-      </div>
-
-      <div style="position: relative; z-index: 5;">
-        <div class="section-tag" style="color: #2997FF;">System Node Link</div>
-        <h2 style="font-size: 2.2rem; font-weight: 600; margin-bottom: 14px; letter-spacing: -0.5px;">Initiate Your Sequence</h2>
-        <p style="color: var(--apple-muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
-          Let's calibrate your post-production systems immediately. Reach out directly through any secure channel below to hook into the workflow pipeline.
-        </p>
-        
-        <div class="contact-links-grid">
-          <a href="mailto:alluriram8142@gmail.com" class="contact-item-pill">
-            <span class="icon">✉</span> 
-            <strong>alluriram8142@gmail.com</strong>
-          </a>
-          <a href="tel:+919515587761" class="contact-item-pill">
-            <span class="icon">📞</span> 
-            <strong>+91 95155 87761</strong>
-          </a>
-          <a href="https://www.linkedin.com/in/mohith-varma-alluri-023133226/" target="_blank" rel="noopener noreferrer" class="contact-item-pill">
-            <span class="icon">🔗</span> 
-            <strong>LinkedIn Connection Profile</strong>
-          </a>
-        </div>
-      </div>
-
+    <div style="background: var(--apple-card); border: 1px solid var(--apple-border); border-radius: 24px; padding: 64px; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 14px; letter-spacing: -0.5px;">Initiate Your Sequence</h2>
+      <p style="color: var(--apple-muted); max-width: 460px; margin: 0 auto 32px; font-size: 0.95rem; line-height: 1.5;">Let's calibrate your post-production systems immediately. Reach out via a priority channel below.</p>
+      <a href="mailto:rammohith43@gmail.com" class="apple-btn btn-primary">Connect via Secure Mail</a>
     </div>
   </section>
 
@@ -944,14 +1148,12 @@
 </footer>
 
 <script>
-  // ── Intersection Revealer
   document.querySelectorAll('.reveal').forEach(el =>
     new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.05 }).observe(el)
   );
 
-  // ── Video Card Hover Controls
   document.querySelectorAll('.video-card').forEach(card => {
     if (card.dataset.type === 'native') {
       const vid = card.querySelector('video');
@@ -960,7 +1162,6 @@
     }
   });
 
-  // ── Lightbox Manager
   const portalLightbox  = document.getElementById('videoLightbox');
   const enginePlayer    = document.getElementById('lightboxVideo');
   const iframeWrapper   = document.getElementById('lightboxIframeWrapper');
@@ -972,6 +1173,7 @@
   function deployLightbox(type, url, title, description){
     textHeadline.textContent = title; 
     textParagraph.textContent = description;
+    
     if (type === 'iframe') {
       enginePlayer.style.display = 'none';
       iframeWrapper.style.display = 'block';
@@ -989,7 +1191,9 @@
   
   function collapseLightbox(){
     portalLightbox.classList.remove('active');
-    enginePlayer.pause(); enginePlayer.src = ''; iframePlayer.src = '';
+    enginePlayer.pause(); 
+    enginePlayer.src = '';
+    iframePlayer.src = '';
   }
   
   document.querySelectorAll('.video-card').forEach(card => {
@@ -999,13 +1203,14 @@
       }
     });
   });
+  
   dismissPortal.addEventListener('click', collapseLightbox);
   portalLightbox.addEventListener('click', e => { if(e.target===portalLightbox) collapseLightbox(); });
 
-  // ── Procedural Timecodes
   const timecodeEl = document.getElementById('ppTimecode');
   const monitorTcEl = document.getElementById('monitorTc');
-  let frames = 0; const FPS = 24;
+  let frames = 0;
+  const FPS = 24;
   setInterval(()=>{
     frames++;
     const s = Math.floor(frames/FPS) % 60;
@@ -1022,133 +1227,204 @@
     }
   }, 1000/FPS);
 
-  // ── Draw Interface Elements (Scopes, Rulers, Backgrounds)
   function drawRuler(){
-    const canvas = document.getElementById('rulerCanvas'); if(!canvas) return;
-    const w = canvas.parentElement.offsetWidth, h = 20; canvas.width = w; canvas.height = h;
-    const ctx = canvas.getContext('2d'); ctx.fillStyle = 'rgba(10,10,14,0.98)'; ctx.fillRect(0,0,w,h);
+    const canvas = document.getElementById('rulerCanvas');
+    if(!canvas) return;
+    const w = canvas.parentElement.offsetWidth;
+    const h = 20;
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = 'rgba(10,10,14,0.98)';
+    ctx.fillRect(0,0,w,h);
     const secWidth = w / 60;
     for(let s=0; s<=60; s++){
-      const x = s * secWidth; const isMajor = s % 5 === 0;
+      const x = s * secWidth;
+      const isMajor = s % 5 === 0;
       ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(x,isMajor?0:10); ctx.lineTo(x,h); ctx.stroke();
+      if(isMajor && s>0){
+        const mins = Math.floor(s/60);
+        const secs = s%60;
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '7px SF Mono, Courier New, monospace';
+        ctx.fillText(`${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}:00`, x+2, h-3);
+      }
     }
   }
-  drawRuler(); window.addEventListener('resize', drawRuler);
+  drawRuler();
+  window.addEventListener('resize', drawRuler);
 
-  // ── 3D Dynamic Workspace System Canvas Setup (Sitting Video Editor Framework) ──
-  (function initWorkspace3D(){
-    const canvas = document.getElementById('workspaceCanvas'); if(!canvas) return;
+  (function monitorLoop(){
+    const canvas = document.getElementById('monitorCanvas');
+    if(!canvas) return;
     const ctx = canvas.getContext('2d');
-    let width = canvas.parentElement.offsetWidth;
-    let height = canvas.parentElement.offsetHeight;
-    canvas.width = width; canvas.height = height;
+    const W=200, H=112;
+    canvas.width=W; canvas.height=H;
+    let t=0;
+    function draw(){
+      t += 0.008;
+      const grad = ctx.createLinearGradient(0,0,W,H);
+      const r = Math.floor(60 + 30*Math.sin(t));
+      const g = Math.floor(100 + 40*Math.sin(t*0.7+1));
+      const b = Math.floor(140 + 50*Math.cos(t*0.5+2));
+      grad.addColorStop(0, `rgb(${r},${g},${b})`);
+      grad.addColorStop(0.5,`rgb(${Math.floor(r*0.6)},${Math.floor(g*0.8)},${Math.floor(b*1.1)})`);
+      grad.addColorStop(1, `rgb(${Math.floor(r*1.2)},${Math.floor(g*0.5)},${Math.floor(b*0.6)})`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
 
-    window.addEventListener('resize', () => {
-      if(!canvas.parentElement) return;
-      width = canvas.parentElement.offsetWidth;
-      height = canvas.parentElement.offsetHeight;
-      canvas.width = width; canvas.height = height;
-    });
-
-    let cycle = 0;
-    function renderPipeline(){
-      cycle += 0.015;
-      ctx.clearRect(0,0,width,height);
-      ctx.save();
-      ctx.translate(width / 2, height / 2 + 10);
-
-      // Procedural Base Grid / Desk Surface Matrix (Isometric Perspective Blueprint)
-      ctx.strokeStyle = 'rgba(41,151,255,0.06)';
-      ctx.lineWidth = 1;
-      for (let i = -6; i <= 6; i++) {
-        // Left to Right Line vectors
-        ctx.beginPath();
-        ctx.moveTo(-220, i * 18 + (Math.sin(cycle)*2));
-        ctx.lineTo(220, i * 12 - (Math.sin(cycle)*2));
-        ctx.stroke();
-        // Diagonal Perspective crossings
-        ctx.beginPath();
-        ctx.moveTo(i * 35, -100);
-        ctx.lineTo(i * 45, 120);
-        ctx.stroke();
+      const imgd = ctx.getImageData(0,0,W,H);
+      const pix = imgd.data;
+      for(let i=0;i<pix.length;i+=4){
+        const n=(Math.random()-0.5)*18;
+        pix[i]+=n; pix[i+1]+=n; pix[i+2]+=n;
       }
+      ctx.putImageData(imgd,0,0);
 
-      // ── 1. The 3D Render Shape Structure: Mac Display Setup
-      ctx.lineWidth = 2;
-      ctx.fillStyle = 'rgba(18,18,24,0.85)';
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      // Stand base
-      ctx.beginPath(); ctx.moveTo(-25, 45); ctx.lineTo(25, 45); ctx.lineTo(12, 15); ctx.lineTo(-12, 15); ctx.closePath(); ctx.fill(); ctx.stroke();
-      // Main UltraWide Monitor Canvas
-      const screenH = 75, screenW = 160;
-      ctx.fillStyle = 'rgba(12,12,16,0.92)';
-      ctx.beginPath(); ctx.rect(-screenW/2, -screenH - 5, screenW, screenH); ctx.fill(); ctx.stroke();
-      
-      // Live Workflows Interface Glow (Premiere Pro Timeline / After Effects Compositing Blueprints)
-      ctx.fillStyle = 'rgba(41, 151, 255, 0.12)'; // Adobe Suite Accent Glow
-      ctx.fillRect(-screenW/2 + 6, -screenH + 2, screenW - 12, screenH - 25);
-      ctx.fillStyle = 'rgba(155, 89, 182, 0.15)'; // After Effects Purple Comp Blocks
-      ctx.fillRect(-screenW/2 + 10, -22, 60, 10);
-      ctx.fillStyle = 'rgba(39, 174, 96, 0.18)';  // Premiere Audio Waves Tracks
-      ctx.fillRect(-screenW/2 + 75, -22, 70, 6);
+      ctx.fillStyle='#000';
+      ctx.fillRect(0,0,W,10);
+      ctx.fillRect(0,H-10,W,10);
 
-      // ── 2. The Wireframe 3D Man Vector (Sitting Editor Entity Blueprint)
-      // Floating offset variable simulating motion and breathing pacing cycles
-      const bounce = Math.sin(cycle) * 3;
-      ctx.strokeStyle = 'rgba(41,151,255,0.65)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle='rgba(255,255,255,0.12)';
+      ctx.lineWidth=0.5;
+      ctx.strokeRect(10,14,W-20,H-28);
 
-      // Torso / Spine Matrix Node
-      ctx.fillStyle = 'rgba(20,25,35,0.9)';
-      ctx.beginPath();
-      ctx.moveTo(-55, 55); // Hip junction
-      ctx.lineTo(-50, 0 + bounce); // Shoulder line anchor
-      ctx.lineTo(-75, -5 + bounce); // Neck posture projection
-      ctx.stroke();
+      ctx.strokeStyle='rgba(255,255,255,0.15)';
+      ctx.beginPath(); ctx.moveTo(W/2-8,H/2); ctx.lineTo(W/2+8,H/2);
+      ctx.moveTo(W/2,H/2-8); ctx.lineTo(W/2,H/2+8); ctx.stroke();
 
-      // Editor Node Head Sphere (Looking forward at the Mac Pro display monitor)
-      ctx.fillStyle = 'rgba(16,22,34,0.95)';
-      ctx.beginPath();
-      ctx.arc(-62, -22 + bounce, 12, 0, Math.PI * 2);
-      ctx.fill(); ctx.stroke();
-      // Glowing Virtual Editing Headset Blueprint ring
-      ctx.strokeStyle = 'rgba(155, 89, 182, 0.8)';
-      ctx.beginPath(); ctx.arc(-62, -22 + bounce, 14, cycle, cycle + 1.2); ctx.stroke();
-
-      // Arms / Kinetic Manipulation Vectors (Reaching outward working on keyboard/controls console)
-      ctx.strokeStyle = 'rgba(41,151,255,0.75)';
-      ctx.beginPath();
-      ctx.moveTo(-50, 0 + bounce); // Upper shoulder joint connection
-      ctx.lineTo(-24, 14 + (Math.cos(cycle)*2)); // Elbow articulation point
-      ctx.lineTo(-10, 28); // Wrist processing coordinate near keyboard layout
-      ctx.stroke();
-
-      // Active Workstream Ray Traces (Energy linking the Operator's field directly to the Mac UI)
-      ctx.strokeStyle = 'rgba(41,151,255,0.25)';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath(); ctx.moveTo(-52, -20 + bounce); ctx.lineTo(-20, -30); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(-52, -24 + bounce); ctx.lineTo(-20, -55); ctx.stroke();
-      ctx.setLineDash([]); // Reset structure defaults
-
-      // Interactive Data Packet Particle Streams drifting around processing environment
-      for(let p = 0; p < 4; p++) {
-        ctx.fillStyle = p % 2 === 0 ? '#2997FF' : '#9B59B6';
-        const px = Math.sin(cycle + p * 8) * 140;
-        const py = Math.cos(cycle * 0.7 + p * 12) * 50 - 20;
-        ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2); ctx.fill();
-      }
-
-      ctx.restore();
-      requestAnimationFrame(renderPipeline);
+      requestAnimationFrame(draw);
     }
-    renderPipeline();
+    draw();
   })();
 
-  // ── Baseline Background Wave loop simulators
+  (function scopeLoop(){
+    const canvas = document.getElementById('scopeCanvas');
+    if(!canvas) return;
+    const W=130, H=110;
+    canvas.width=W; canvas.height=H;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    function draw(){
+      t+=0.03;
+      ctx.fillStyle='rgba(5,5,8,0.9)';
+      ctx.fillRect(0,0,W,H);
+
+      const mid = H/2 - 8;
+      ctx.strokeStyle='rgba(0,255,80,0.6)';
+      ctx.lineWidth=0.8;
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.4*Math.sin(x*0.08+t) + 0.3*Math.sin(x*0.18+t*1.3) + 0.2*Math.sin(x*0.04+t*0.7));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,80,0,0.5)';
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.35*Math.cos(x*0.09+t*1.1) + 0.25*Math.sin(x*0.15+t*0.8));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,255,255,0.08)';
+      ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(0,mid+10); ctx.lineTo(W,mid+10); ctx.stroke();
+
+      const cx=W/2, cy=(H+mid+10)/2, cr=20;
+      ctx.strokeStyle='rgba(255,255,255,0.06)';
+      ctx.lineWidth=0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,cr,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,cr*0.66,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle='rgba(0,255,80,0.5)';
+      for(let i=0;i<40;i++){
+        const a = (i/40)*Math.PI*2 + t*0.2;
+        const r2 = cr*(0.3+0.5*Math.abs(Math.sin(i*0.7+t)));
+        const px=cx+r2*Math.cos(a), py=cy+r2*Math.sin(a);
+        ctx.beginPath(); ctx.arc(px,py,1,0,Math.PI*2); ctx.fill();
+      }
+
+      ctx.fillStyle='rgba(255,255,255,0.25)';
+      ctx.font='6px SF Mono, monospace';
+      ctx.fillText('WAVEFORM',2,8);
+      ctx.fillText('VECTOR',2,mid+18);
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  (function bgLoop(){
+    const canvas = document.getElementById('bg-edit-canvas');
+    if(!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    window.addEventListener('resize',()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    });
+    function draw(){
+      t+=0.004;
+      const W=canvas.width, H=canvas.height;
+      const bg = ctx.createRadialGradient(W*0.3,H*0.4,0,W*0.5,H*0.5,W*0.8);
+      bg.addColorStop(0, `hsl(${220+20*Math.sin(t)},40%,12%)`);
+      bg.addColorStop(0.5,`hsl(${200+15*Math.cos(t*0.7)},30%,7%)`);
+      bg.addColorStop(1, `hsl(${180+10*Math.sin(t*0.4)},20%,3%)`);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      for(let i=0;i<3;i++){
+        const angle = Math.PI*0.3 + i*0.3 + Math.sin(t*0.5+i)*0.05;
+        const x = W*(0.2+i*0.3);
+        const grad2 = ctx.createLinearGradient(x,0,x+Math.cos(angle)*W*0.6, Math.sin(angle)*H*0.8);
+        grad2.addColorStop(0,`rgba(41,151,255,0.02)`);
+        grad2.addColorStop(1,'transparent');
+        ctx.fillStyle=grad2;
+        ctx.save();
+        ctx.translate(x,0);
+        ctx.rotate(angle - Math.PI/2);
+        ctx.fillRect(-60,0,120,W);
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  function animateWaveCanvas(id, colorR, colorG, colorB, seed){
+    const c = document.getElementById(id);
+    if(!c) return;
+    const ctx = c.getContext('2d');
+    let t=seed||0;
+    function draw(){
+      t+=0.04;
+      const W=c.offsetWidth||100, H=c.offsetHeight||26;
+      c.width=W; c.height=H;
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle=`rgba(${colorR},${colorG},${colorB},0.7)`;
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      const mid=H/2;
+      for(let x=0;x<W;x++){
+        const v = mid * (0.5*Math.sin(x*0.15+t) + 0.3*Math.sin(x*0.3+t*1.5+seed) + 0.15*Math.cos(x*0.08+t*0.6));
+        x===0 ? ctx.moveTo(x, mid+v) : ctx.lineTo(x, mid+v);
+      }
+      ctx.stroke();
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
   animateWaveCanvas('waveA1a',255,180,50,0);
+  animateWaveCanvas('waveA1b',255,180,50,1.5);
   animateWaveCanvas('waveA2a',80,220,120,0.8);
+  animateWaveCanvas('waveA2b',80,220,120,2.1);
+  animateWaveCanvas('waveA2c',80,220,120,3.4);
+  animateWaveCanvas('waveA2d',80,220,120,0.3);
 </script>
 </body>
 </html>
