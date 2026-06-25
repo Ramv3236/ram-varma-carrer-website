@@ -504,13 +504,25 @@
   .video-card:hover { transform: translateY(-4px); border-color: var(--apple-hover-border); }
   
   .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; overflow: hidden; }
-  .video-container video, .video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-  .video-card:hover .video-container video { transform: scale(1.03); }
+  .video-container video, .video-container .iframe-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .video-card:hover .video-container video, .video-card:hover .video-container .iframe-placeholder { transform: scale(1.03); }
+  
+  .iframe-placeholder {
+    background: linear-gradient(135deg, #1e1e24 0%, #0d0d11 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .iframe-placeholder::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(41,151,255,0.08) 0%, transparent 70%);
+  }
+  .iframe-placeholder span {
+    font-family: 'SF Mono', monospace; font-size: 11px; color: var(--apple-muted); letter-spacing: 1px; text-transform: uppercase;
+  }
 
   .play-indicator {
     position: absolute; bottom: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
     background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center;
-    border: 1px solid rgba(255,255,255,0.1); z-index: 2; pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.1); z-index: 2;
   }
   
   .card-details { padding: 24px; }
@@ -988,14 +1000,20 @@
       </div>
 
       <div class="video-card reveal" 
-           data-type="embedded-frame"
+           data-type="iframe"
+           data-video="https://jumpshare.com/embed/fC7IpBiTUOnzq0NsCty4" 
            data-title="Jumpshare Master Showcase Reel" 
            data-desc="Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.">
         <div class="video-container">
-          <iframe id="js_video_iframe" src="https://jumpshare.com/embed/fC7IpBiTUOnzq0NsCty4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+          <div class="iframe-placeholder">
+            <span>[ Load Production Module ]</span>
+          </div>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
         </div>
         <div class="card-details">
-          <div class="card-badge jumpshare">Live Stream Module</div>
+          <div class="card-badge jumpshare">Stream Module</div>
           <div class="card-title">Jumpshare Master Showcase Reel</div>
           <div class="card-description">Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.</div>
         </div>
@@ -1155,11 +1173,9 @@
   );
 
   document.querySelectorAll('.video-card').forEach(card => {
-    if (card.dataset.type === 'native') {
-      const vid = card.querySelector('video');
-      card.addEventListener('mouseenter', () => vid && vid.play().catch(()=>{}));
-      card.addEventListener('mouseleave', () => { if(vid){ vid.pause(); vid.currentTime=0; } });
-    }
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', () => vid && vid.play().catch(()=>{}));
+    card.addEventListener('mouseleave', () => { if(vid){ vid.pause(); vid.currentTime=0; } });
   });
 
   const portalLightbox  = document.getElementById('videoLightbox');
@@ -1178,15 +1194,15 @@
       enginePlayer.style.display = 'none';
       iframeWrapper.style.display = 'block';
       iframePlayer.src = url;
-      portalLightbox.classList.add('active');
-    } else if (type === 'native') {
+    } else {
       iframeWrapper.style.display = 'none';
       iframePlayer.src = '';
       enginePlayer.style.display = 'block';
       enginePlayer.src = url;
       enginePlayer.play().catch(()=>{});
-      portalLightbox.classList.add('active');
     }
+    
+    portalLightbox.classList.add('active');
   }
   
   function collapseLightbox(){
@@ -1197,11 +1213,9 @@
   }
   
   document.querySelectorAll('.video-card').forEach(card => {
-    card.addEventListener('click', () => {
-      if(card.dataset.type !== 'embedded-frame') {
-        deployLightbox(card.dataset.type, card.dataset.video, card.dataset.title, card.dataset.desc);
-      }
-    });
+    card.addEventListener('click', () =>
+      deployLightbox(card.dataset.type, card.dataset.video, card.dataset.title, card.dataset.desc)
+    );
   });
   
   dismissPortal.addEventListener('click', collapseLightbox);
