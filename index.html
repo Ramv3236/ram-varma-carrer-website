@@ -1,3 +1,6 @@
+Here is the updated code with your direct contact channels (`alluriram8142@gmail.com`, `+919515587761`, and your LinkedIn profile) integrated perfectly into both the header navigation, the designated contact grid section, and the updated footer layout:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +31,8 @@
     color: var(--apple-text);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    padding-bottom: 340px; /* Space for fixed timeline workspace */
   }
 
-  /* Ambient Glass Gradient Background Overlays */
   .ambient-blur {
     position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
   }
@@ -40,10 +41,6 @@
   }
   .orb-1 { width: 600px; height: 600px; top: -150px; left: -100px; background: radial-gradient(circle, #2997FF, transparent 70%); }
   .orb-2 { width: 500px; height: 500px; bottom: 20%; right: -100px; background: radial-gradient(circle, #8B5CF6, transparent 70%); }
-
-  /* ═══════════════════════════════════════════════════════════
-       PREMIERE PRO FULL EDITING ENVIRONMENT BACKGROUND
-  ═══════════════════════════════════════════════════════════ */
 
   #bg-edit-canvas {
     position: fixed; inset: 0; z-index: 0;
@@ -69,7 +66,6 @@
       );
   }
 
-  /* ── FLOATING EFFECTS PRESETS PANEL (top-right) ── */
   .pp-effects-panel {
     position: absolute; top: 64px; right: 18px; width: 170px; z-index: 6;
     background: rgba(14,14,18,0.82);
@@ -104,7 +100,6 @@
   .pp-effect-item.active { background:rgba(41,151,255,0.08); color:rgba(160,210,255,0.9); }
   .pp-effect-item.active::before { content:'●'; color:#2997FF; }
 
-  /* ── FLOATING SOURCE MONITOR (top-left) ── */
   .pp-source-monitor {
     position: absolute; top: 64px; left: 18px; width: 200px; z-index: 6;
     background: rgba(14,14,18,0.85);
@@ -132,7 +127,6 @@
     color:#2997FF; letter-spacing:1px;
   }
 
-  /* ── LUMETRI SCOPES PANEL ── */
   .pp-scopes {
     position: absolute; top: 64px; left: 236px; width: 130px; z-index: 6;
     background: rgba(14,14,18,0.82); border: 1px solid rgba(255,255,255,0.07);
@@ -146,16 +140,15 @@
     color:rgba(255,255,255,0.4); letter-spacing:1px; text-transform:uppercase;
     border-bottom:1px solid rgba(255,255,255,0.05);
   }
-  .pp-scope-canvas { display:block; width:100%; height: 75px; background: #08080c; }
+  .pp-scope-canvas { display:block; width:100%; }
 
-  /* ── MAIN TIMELINE PANEL ── */
   .pp-panel {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    height: 310px; z-index: 90;
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 310px;
     background: linear-gradient(180deg,
       rgba(20,20,24,0) 0%,
-      rgba(18,18,22,0.96) 8%,
-      rgba(15,15,19,1) 100%
+      rgba(18,18,22,0.93) 8%,
+      rgba(15,15,19,0.98) 100%
     );
     border-top: 1px solid rgba(255,255,255,0.08);
     display: flex; flex-direction: column;
@@ -197,4 +190,1284 @@
 
   .pp-playhead {
     position: absolute; top: 20px; width: 2px; height: calc(100% - 20px);
-    background: linear-gradient(180deg,#FF6B35 0%,rgba(255,107,53,0.15)
+    background: linear-gradient(180deg,#FF6B35 0%,rgba(255,107,53,0.15) 100%);
+    z-index: 8; pointer-events: none;
+    animation: playheadMove 12s cubic-bezier(0.4,0,0.6,1) infinite;
+  }
+  .pp-playhead::before {
+    content:'▼'; position:absolute; top:-14px; left:-5px;
+    font-size:9px; color:#FF6B35;
+    text-shadow:0 0 6px rgba(255,107,53,0.8);
+  }
+  .pp-playhead::after {
+    content:''; position:absolute; top:0; left:-6px; width:14px; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,107,53,0.04), transparent);
+  }
+  @keyframes playheadMove {
+    0%   { left: 82px; }
+    45%  { left: calc(95% + 82px); }
+    50%  { left: calc(95% + 82px); }
+    100% { left: 82px; }
+  }
+
+  .pp-track-area {
+    flex:1; display:flex; overflow:hidden;
+  }
+  .pp-track-headers {
+    width:82px; flex-shrink:0;
+    background:rgba(12,12,16,0.97);
+    border-right:1px solid rgba(255,255,255,0.07);
+    display:flex; flex-direction:column; gap:2px; padding:4px 0;
+    overflow:hidden;
+  }
+  .pp-track-header {
+    height:26px; flex-shrink:0;
+    display:flex; align-items:center; padding:0 6px; gap:4px;
+  }
+  .pp-track-header-eye {
+    width:10px; height:10px; border-radius:50%;
+    background:rgba(255,255,255,0.1); flex-shrink:0;
+    font-size:7px; display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.4);
+  }
+  .pp-track-header-eye.on { background:rgba(255,255,100,0.15); color:rgba(255,255,100,0.7); }
+  .pp-track-header-name {
+    font-family:'SF Mono',monospace; font-size:7px;
+    color:rgba(255,255,255,0.35); white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; flex:1;
+  }
+  .pp-track-header-lock {
+    font-size:7px; color:rgba(255,255,255,0.15);
+  }
+
+  .pp-tracks { flex:1; display:flex; flex-direction:column; gap:2px; padding:4px 4px; overflow:hidden; }
+  .pp-track {
+    height:26px; flex-shrink:0; position:relative;
+    border-radius:2px; background:rgba(255,255,255,0.015);
+    overflow:hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .pp-clip {
+    position: absolute; top:1px; height:calc(100% - 2px);
+    border-radius:3px;
+    display:flex; align-items:center; padding:0 7px;
+    font-family:'SF Mono',monospace; font-size:6.5px; font-weight:700;
+    letter-spacing:0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    border-top:1px solid rgba(255,255,255,0.18);
+    border-left:1px solid rgba(255,255,255,0.1);
+  }
+
+  .c-purple { background:linear-gradient(135deg,rgba(75,35,150,0.9),rgba(105,60,195,0.75)); color:rgba(210,185,255,0.9); }
+  .c-blue   { background:linear-gradient(135deg,rgba(30,75,165,0.9),rgba(50,110,215,0.75)); color:rgba(160,205,255,0.9); }
+  .c-teal   { background:linear-gradient(135deg,rgba(15,85,75,0.9),rgba(25,125,105,0.75)); color:rgba(120,235,205,0.9); }
+  .c-green  { background:linear-gradient(135deg,rgba(20,100,40,0.9),rgba(35,145,60,0.75)); color:rgba(140,240,160,0.9); }
+  .c-amber  { background:linear-gradient(135deg,rgba(130,65,0,0.9),rgba(190,95,0,0.75)); color:rgba(255,200,100,0.9); }
+  .c-red    { background:linear-gradient(135deg,rgba(140,25,25,0.75),rgba(195,40,40,0.55)); color:rgba(255,155,155,0.9); }
+  .c-pink   { background:linear-gradient(135deg,rgba(130,25,100,0.75),rgba(185,40,140,0.55)); color:rgba(255,160,230,0.9); }
+  .c-slate  { background:linear-gradient(135deg,rgba(40,50,70,0.85),rgba(60,75,105,0.7)); color:rgba(175,195,235,0.9); }
+
+  .pp-xdissolve {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; z-index:3;
+    background:rgba(255,255,255,0.18);
+    clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  }
+  .pp-dip {
+    position:absolute; top:0; width:10px; height:100%; z-index:3;
+    background:linear-gradient(90deg, transparent, rgba(0,0,0,0.7), transparent);
+  }
+  .pp-mblur {
+    position:absolute; top:0; width:16px; height:100%; z-index:3;
+    background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    filter:blur(2px);
+  }
+
+  .pp-wave-canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+  .pp-kf {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:6px; height:6px; z-index:4;
+    background:#FFD700;
+    clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  }
+
+  .pp-fx-ticker {
+    position:absolute; bottom:310px; left:0; right:0; height:22px;
+    background:rgba(10,10,14,0.85); border-top:1px solid rgba(255,255,255,0.05);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden; display:flex; align-items:center;
+  }
+  .pp-fx-ticker-inner {
+    display:flex; align-items:center; gap:0; white-space:nowrap;
+    animation: fxScroll 30s linear infinite;
+    font-family:'SF Mono',monospace; font-size:7.5px; color:rgba(255,255,255,0.3);
+  }
+  @keyframes fxScroll {
+    0%   { transform:translateX(0); }
+    100% { transform:translateX(-50%); }
+  }
+  .pp-fx-chip {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:2px 12px; border-right:1px solid rgba(255,255,255,0.05);
+  }
+  .pp-fx-chip .dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+  .dot-purple { background:#9B59B6; }
+  .dot-blue   { background:#2997FF; }
+  .dot-green  { background:#27AE60; }
+  .dot-amber  { background:#F39C12; }
+  .dot-red    { background:#E74C3C; }
+  .dot-cyan   { background:#1ABC9C; }
+
+  @keyframes trackScroll {
+    0%   { transform:translateX(0); }
+    40%  { transform:translateX(-18%); }
+    60%  { transform:translateX(-18%); }
+    100% { transform:translateX(0); }
+  }
+  .pp-track-scroll { animation: trackScroll 22s ease-in-out infinite; width:160%; }
+
+  .video-card,
+  .cert-card,
+  .price-card,
+  .contact-method-card {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(22, 22, 26, 0.72) !important;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.4),
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(255,255,255,0.06);
+    transition: 
+      transform 0.4s cubic-bezier(0.25,1,0.5,1),
+      box-shadow 0.4s ease,
+      border-color 0.4s ease !important;
+  }
+
+  .video-card:hover,
+  .cert-card:hover,
+  .price-card:hover,
+  .contact-method-card:hover {
+    box-shadow: 
+      0 20px 60px rgba(0,0,0,0.6),
+      0 1px 0 rgba(255,255,255,0.1) inset,
+      0 0 0 1px rgba(255,255,255,0.12),
+      0 0 40px rgba(41,151,255,0.08) !important;
+    transform: translateY(-6px) scale(1.01) !important;
+  }
+
+  .video-card::after,
+  .price-card::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.04) 40%,
+      rgba(255,255,255,0.08) 50%,
+      rgba(255,255,255,0.04) 60%,
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 200%;
+    background-position: -100% -100%;
+    transition: background-position 0.6s ease;
+    pointer-events: none; z-index: 0;
+  }
+  .video-card:hover::after,
+  .price-card:hover::after {
+    background-position: 200% 200%;
+  }
+
+  .hero-pill {
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    background: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.08) inset;
+    animation: pillFloat 4s ease-in-out infinite;
+  }
+  @keyframes pillFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-4px); }
+  }
+
+  .apple-btn {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative; overflow: hidden;
+  }
+  .apple-btn::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.5s ease;
+  }
+  .apple-btn:hover::before { left: 140%; }
+
+  .profile-image-wrapper {
+    box-shadow: 
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 24px 48px rgba(0,0,0,0.5),
+      0 0 80px rgba(41,151,255,0.06);
+  }
+
+  .tool-item {
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.04) !important;
+    transition: all 0.3s ease;
+  }
+  .tool-item:hover {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.15) !important;
+    transform: translateY(-2px);
+  }
+
+  .section-tag {
+    text-shadow: 0 0 20px rgba(41,151,255,0.5);
+  }
+
+  .price-card.featured {
+    background: rgba(30,35,55,0.8) !important;
+    backdrop-filter: blur(24px) saturate(200%);
+    box-shadow: 
+      0 30px 80px rgba(0,0,0,0.6),
+      0 0 60px rgba(41,151,255,0.12),
+      0 1px 0 rgba(100,160,255,0.15) inset !important;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 52px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--apple-border);
+  }
+  .nav-logo { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.2px; color: var(--apple-text); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--apple-muted); font-size: 0.82rem; font-weight: 400;
+    transition: color 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--apple-text); }
+
+  .main-container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding-top: 60px;
+  }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 40px;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--apple-border);
+    font-size: 0.75rem; font-weight: 500; color: var(--apple-text); margin-bottom: 24px;
+  }
+  .hero-pill .dot { width: 6px; height: 6px; background: #34C759; border-radius: 50%; }
+  
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.6rem); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1;
+    background: linear-gradient(180deg, #FFFFFF 0%, #8E8E93 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 24px;
+  }
+  .hero p {
+    font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--apple-muted); max-width: 620px;
+    line-height: 1.5; font-weight: 400; margin-bottom: 36px;
+  }
+  
+  .apple-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 12px 26px; border-radius: 40px; font-size: 0.88rem; font-weight: 400;
+    text-decoration: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .btn-primary { background: var(--apple-text); color: var(--apple-bg); }
+  .btn-primary:hover { opacity: 0.9; transform: scale(1.01); }
+  .btn-secondary { background: transparent; color: var(--apple-text); border: 1px solid var(--apple-border); margin-left: 12px; }
+  .btn-secondary:hover { background: rgba(255,255,255,0.03); border-color: var(--apple-hover-border); }
+
+  section { padding: 100px 0 20px 0; }
+  .section-tag { font-size: 0.78rem; font-weight: 600; color: var(--apple-accent); margin-bottom: 12px; letter-spacing: 0.8px; text-transform: uppercase; }
+  .section-title { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.6px; margin-bottom: 48px; }
+
+  .profile-section { display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: center; }
+  .profile-image-wrapper { position: relative; width: 320px; height: 420px; border-radius: 20px; overflow: hidden; background: var(--apple-card); border: 1px solid var(--apple-border); }
+  .profile-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  
+  .profile-info h3 { font-size: 2rem; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .profile-info p { font-size: 0.98rem; color: var(--apple-muted); line-height: 1.6; margin-bottom: 28px; }
+
+  .tools-dock { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+  .tool-item {
+    background: var(--apple-card); border: 1px solid var(--apple-border);
+    padding: 16px; border-radius: 12px; text-align: center; font-size: 0.85rem; font-weight: 500;
+  }
+
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .video-card {
+    background: var(--apple-card); border: 1px solid var(--apple-border); border-radius: 18px;
+    overflow: hidden; cursor: pointer; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease;
+  }
+  .video-card:hover { transform: translateY(-4px); border-color: var(--apple-hover-border); }
+  
+  .video-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; overflow: hidden; }
+  .video-container video, .video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .video-card:hover .video-container video { transform: scale(1.03); }
+
+  .play-indicator {
+    position: absolute; bottom: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1); z-index: 2; pointer-events: none;
+  }
+  
+  .card-details { padding: 24px; }
+  .card-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 500; background: rgba(255,255,255,0.05); color: var(--apple-text); margin-bottom: 12px; border: 1px solid var(--apple-border); }
+  .card-badge.working { background: rgba(0, 113, 227, 0.12); color: #2997FF; border-color: rgba(0, 113, 227, 0.25); }
+  .card-badge.jumpshare { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border-color: rgba(139, 92, 246, 0.25); }
+  .card-title { font-size: 1.05rem; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.1px; line-height: 1.4; }
+  .card-description { font-size: 0.85rem; color: var(--apple-muted); line-height: 1.5; }
+
+  .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+  .cert-card {
+    background: var(--apple-card); border: 1px solid var(--apple-border);
+    padding: 24px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cert-issuer { font-size: 0.75rem; font-weight: 600; color: #FF9F0A; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .cert-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--apple-text); }
+  .cert-meta { font-size: 0.8rem; color: var(--apple-muted); line-height: 1.6; }
+  .cert-id { font-family: monospace; background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 4px; color: var(--apple-text); }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: stretch; }
+  .price-card {
+    background: var(--apple-card); border: 1px solid var(--apple-border);
+    border-radius: 20px; padding: 36px 24px; display: flex; flex-direction: column; position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease;
+  }
+  .price-card.featured {
+    background: var(--apple-card-light); border-color: rgba(0, 113, 227, 0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  .price-card:hover { border-color: var(--apple-hover-border); transform: scale(1.01); }
+  .price-tag-badge {
+    position: absolute; top: 20px; right: 20px; padding: 4px 10px; border-radius: 20px;
+    font-size: 0.65rem; font-weight: 600; background: var(--apple-accent); color: #FFF;
+  }
+  .price-tier { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: var(--apple-text); }
+  .price-amount { font-size: 2.1rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 6px; color: #FFF; }
+  .price-amount span { font-size: 0.8rem; font-weight: 400; color: var(--apple-muted); letter-spacing: 0; }
+  .price-desc { font-size: 0.82rem; color: var(--apple-muted); margin-bottom: 24px; line-height: 1.4; min-height: 44px; }
+  
+  .price-features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; flex-grow: 1; }
+  .price-features-list li { font-size: 0.84rem; color: #E5E5EA; display: flex; align-items: center; gap: 8px; line-height: 1.3; }
+  .price-features-list li::before { content: "✓"; color: var(--apple-accent); font-weight: bold; flex-shrink: 0; }
+  
+  .price-btn { text-align: center; width: 100%; padding: 11px; border-radius: 30px; font-size: 0.85rem; font-weight: 500; text-decoration: none; display: block; transition: all 0.2s; }
+  .btn-tier-standard { background: rgba(255,255,255,0.06); color: var(--apple-text); border: 1px solid var(--apple-border); }
+  .btn-tier-standard:hover { background: rgba(255,255,255,0.1); }
+  .btn-tier-featured { background: var(--apple-accent); color: #FFF; }
+  .btn-tier-featured:hover { opacity: 0.9; }
+
+  /* New Contact Form Styles */
+  .contact-channels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+  .contact-method-card { border: 1px solid var(--apple-border); border-radius: 16px; padding: 24px; text-align: center; text-decoration: none; display: block; }
+  .contact-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+  .contact-label { font-size: 0.75rem; color: var(--apple-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 6px; }
+  .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--apple-text); word-break: break-all; }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(25px); display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1); padding: 32px;
+  }
+  .lightbox.active { opacity: 1; pointer-events: all; }
+  .lightbox-body { width: 100%; max-width: 960px; transform: scale(0.96); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+  .lightbox.active .lightbox-body { transform: scale(1); }
+  .lightbox video, .lightbox .lightbox-iframe-wrapper { width: 100%; border-radius: 14px; background: #000; display: none; border: 1px solid var(--apple-border); }
+  .lightbox .lightbox-iframe-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+  .lightbox .lightbox-iframe-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .lightbox-header { margin-top: 20px; display: flex; flex-direction: column; }
+  .lightbox-title { font-size: 1.35rem; font-weight: 500; color: #fff; margin-bottom: 6px; }
+  .lightbox-desc { font-size: 0.9rem; color: var(--apple-muted); line-height: 1.5; }
+  .lightbox-dismiss {
+    position: absolute; top: -44px; right: 0; width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: #fff;
+  }
+
+  footer { text-align: center; padding: 80px 0 40px; border-top: 1px solid var(--apple-border); color: var(--apple-muted); font-size: 0.78rem; }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 12px; }
+  .footer-links a { color: var(--apple-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--apple-accent); }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media(max-width: 1024px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media(max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .profile-section { grid-template-columns: 1fr; gap: 32px; justify-items: center; }
+    .profile-image-wrapper { width: 100%; max-width: 300px; height: 380px; }
+    .tools-dock { grid-template-columns: repeat(2, 1fr); }
+    .cert-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .contact-channels-grid { grid-template-columns: 1fr; gap: 14px; }
+    section { padding: 80px 0 20px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-blur">
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+</div>
+
+<canvas id="bg-edit-canvas"></canvas>
+
+<div class="pp-timeline-bg" aria-hidden="true">
+
+  <div class="pp-source-monitor">
+    <div class="pp-monitor-screen">
+      <canvas id="monitorCanvas" width="200" height="112"></canvas>
+    </div>
+    <div class="pp-monitor-bar">
+      <div class="pp-monitor-label">HERO_SHOT_FINAL_v3.mp4</div>
+      <div class="pp-monitor-tc" id="monitorTc">00:00:14:08</div>
+    </div>
+  </div>
+
+  <div class="pp-scopes">
+    <div class="pp-scopes-header">Lumetri Scopes</div>
+    <canvas id="scopeCanvas" class="pp-scope-canvas" width="130" height="110"></canvas>
+  </div>
+
+  <div class="pp-effects-panel">
+    <div class="pp-effects-header">Effects &amp; Presets</div>
+    <div class="pp-effect-category">▸ Video Effects</div>
+    <div class="pp-effect-item active">Lumetri Color</div>
+    <div class="pp-effect-item active">Gaussian Blur</div>
+    <div class="pp-effect-item">Sharpen</div>
+    <div class="pp-effect-item">Warp Stabilizer</div>
+    <div class="pp-effect-item">Unsharp Mask</div>
+    <div class="pp-effect-category">▸ Transitions</div>
+    <div class="pp-effect-item active">Cross Dissolve</div>
+    <div class="pp-effect-item">Dip to Black</div>
+    <div class="pp-effect-item active">Film Dissolve</div>
+    <div class="pp-effect-item">Push</div>
+    <div class="pp-effect-item">Slide</div>
+    <div class="pp-effect-item">Zoom</div>
+    <div class="pp-effect-category">▸ Audio Effects</div>
+    <div class="pp-effect-item active">Parametric EQ</div>
+    <div class="pp-effect-item active">Dynamics</div>
+    <div class="pp-effect-item">DeNoise</div>
+    <div class="pp-effect-item">Reverb</div>
+    <div class="pp-effect-category">▸ Presets</div>
+    <div class="pp-effect-item">Cinematic LUT</div>
+    <div class="pp-effect-item active">Bleach Bypass</div>
+    <div class="pp-effect-item">Teal &amp; Orange</div>
+    <div class="pp-effect-item">Matte Look</div>
+  </div>
+
+  <div class="pp-fx-ticker">
+    <div class="pp-fx-ticker-inner">
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Cross Dissolve</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lumetri Color · Exposure +0.4</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Parametric EQ · Bass Boost</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Cross Dissolve</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lumetri Color · Exposure +0.4</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Parametric EQ · Bass Boost</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Warp Stabilizer · Smooth 15%</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Film Dissolve 18f</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Gaussian Blur · Feather 8</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Dip to Black 12f</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Color Balance · Shadows −8</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>Dynamics · Compressor 4:1</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Motion Blur · Shutter 180°</div>
+      <div class="pp-fx-chip"><span class="dot dot-green"></span>Bleach Bypass · Strength 60%</div>
+      <div class="pp-fx-chip"><span class="dot dot-cyan"></span>Teal &amp; Orange LUT · Intensity 85</div>
+      <div class="pp-fx-chip"><span class="dot dot-purple"></span>Ultra Key · Chroma Green</div>
+      <div class="pp-fx-chip"><span class="dot dot-blue"></span>Lens Distortion · −12</div>
+      <div class="pp-fx-chip"><span class="dot dot-amber"></span>DeNoise · 55%</div>
+      <div class="pp-fx-chip"><span class="dot dot-red"></span>Speed Ramp · 400% → 100%</div>
+    </div>
+  </div>
+
+  <div class="pp-panel">
+
+    <div class="pp-toolbar">
+      <div class="pp-toolbar-btn">◀◀</div>
+      <div class="pp-toolbar-btn active">▶</div>
+      <div class="pp-toolbar-btn">▶▶</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn active">✂</div>
+      <div class="pp-toolbar-btn">↑</div>
+      <div class="pp-toolbar-btn">⊞</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn">🔗</div>
+      <div class="pp-toolbar-btn">M</div>
+      <div class="pp-toolbar-btn active">S</div>
+      <div class="pp-toolbar-sep"></div>
+      <div class="pp-toolbar-btn">⊡</div>
+      <div class="pp-toolbar-btn">≡</div>
+      <div class="pp-timecode" id="ppTimecode">00:00:00:00</div>
+      <div class="pp-fps-label">24.00 fps · 1920×1080</div>
+    </div>
+
+    <div class="pp-ruler">
+      <div class="pp-ruler-track-spacer"></div>
+      <div class="pp-ruler-ticks">
+        <canvas id="rulerCanvas"></canvas>
+      </div>
+      <div class="pp-playhead" id="ppPlayhead"></div>
+    </div>
+
+    <div class="pp-track-area">
+
+      <div class="pp-track-headers">
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">FX · Adj</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V3 · Title</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V2 · B-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">V1 · A-Roll</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A1 · Music</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">A2 · VO</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye">👁</div>
+          <div class="pp-track-header-name">A3 · SFX</div>
+          <div class="pp-track-header-lock">🔒</div>
+        </div>
+        <div class="pp-track-header">
+          <div class="pp-track-header-eye on">👁</div>
+          <div class="pp-track-header-name">Sub · CC</div>
+          <div class="pp-track-header-lock">🔓</div>
+        </div>
+      </div>
+
+      <div class="pp-tracks">
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-red" style="left:0%;width:100%;">Adjustment Layer · Lumetri Color · Bleach Bypass · Film Grain</div>
+            <div class="pp-kf" style="left:12%"></div>
+            <div class="pp-kf" style="left:35%"></div>
+            <div class="pp-kf" style="left:58%"></div>
+            <div class="pp-kf" style="left:82%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-pink" style="left:0%;width:18%;">Lower Third · Name</div>
+            <div class="pp-clip c-pink" style="left:20%;width:12%;">Title Card</div>
+            <div class="pp-clip c-slate" style="left:35%;width:22%;">Motion Graphic · SaaS Logo</div>
+            <div class="pp-clip c-pink" style="left:60%;width:10%;">End Screen</div>
+            <div class="pp-clip c-slate" style="left:73%;width:20%;">Subtitle · Dynamic Text</div>
+            <div class="pp-xdissolve" style="left:32.5%"></div>
+            <div class="pp-xdissolve" style="left:57.5%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-teal" style="left:0%;width:15%;">B-Roll_Desk.mp4</div>
+            <div class="pp-clip c-teal" style="left:17%;width:22%;">CutAway_SaaS_Demo.mp4</div>
+            <div class="pp-clip c-teal" style="left:41%;width:13%;">Insert_Screen.mp4</div>
+            <div class="pp-clip c-teal" style="left:56%;width:18%;">BTS_Studio_RAW.mp4</div>
+            <div class="pp-clip c-teal" style="left:76%;width:17%;">Drone_Aerial_4K.mp4</div>
+            <div class="pp-dip"   style="left:15%"></div>
+            <div class="pp-dip"   style="left:39%"></div>
+            <div class="pp-mblur" style="left:54%"></div>
+            <div class="pp-dip"   style="left:74%"></div>
+            <div class="pp-kf" style="left:8%"></div>
+            <div class="pp-kf" style="left:28%"></div>
+            <div class="pp-kf" style="left:65%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-purple" style="left:0%;width:20%;">INTERVIEW_A_ROLL_01.mp4</div>
+            <div class="pp-clip c-blue"   style="left:22%;width:18%;">WALK_TALK_SHOT.mp4</div>
+            <div class="pp-clip c-purple" style="left:42%;width:26%;">HERO_SHOT_FINAL_v3.mp4</div>
+            <div class="pp-clip c-blue"   style="left:70%;width:15%;">REACTION_CUT.mp4</div>
+            <div class="pp-clip c-purple" style="left:87%;width:12%;">OUTRO_SEQ.mp4</div>
+            <div class="pp-xdissolve" style="left:20%"></div>
+            <div class="pp-mblur"     style="left:40%"></div>
+            <div class="pp-xdissolve" style="left:68%"></div>
+            <div class="pp-dip"       style="left:85%"></div>
+            <div class="pp-kf" style="left:5%"></div>
+            <div class="pp-kf" style="left:31%"></div>
+            <div class="pp-kf" style="left:55%"></div>
+            <div class="pp-kf" style="left:78%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-amber" style="left:0%;width:60%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1a"></canvas>
+            </div>
+            <div class="pp-clip c-amber" style="left:62%;width:37%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA1b"></canvas>
+            </div>
+            <div class="pp-kf" style="left:10%"></div>
+            <div class="pp-kf" style="left:50%"></div>
+            <div class="pp-kf" style="left:90%"></div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:32px;">
+          <div class="pp-track-scroll" style="position:relative;height:100%;">
+            <div class="pp-clip c-green" style="left:0%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2a"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:20%;width:24%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2b"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:46%;width:32%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2c"></canvas>
+            </div>
+            <div class="pp-clip c-green" style="left:80%;width:18%;overflow:hidden;">
+              <canvas class="pp-wave-canvas" id="waveA2d"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="pp-track" style="height:26px;">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-slate" style="left:5%;width:8%;">SFX_Whoosh</div>
+            <div class="pp-clip c-slate" style="left:19%;width:6%;">Impact</div>
+            <div class="pp-clip c-slate" style="left:33%;width:9%;">Transition_Air</div>
+            <div class="pp-clip c-slate" style="left:48%;width:7%;">SFX_Click</div>
+            <div class="pp-clip c-slate" style="left:61%;width:11%;">Ambient_Room</div>
+            <div class="pp-clip c-slate" style="left:79%;width:8%;">SFX_Riser</div>
+            <div class="pp-clip c-slate" style="left:91%;width:7%;">Swoosh</div>
+          </div>
+        </div>
+
+        <div class="pp-track">
+          <div class="pp-track-scroll">
+            <div class="pp-clip c-blue" style="left:0%;width:12%;font-size:6px;">CC: "Welcome to the edit..."</div>
+            <div class="pp-clip c-blue" style="left:14%;width:14%;font-size:6px;">CC: "Every frame matters..."</div>
+            <div class="pp-clip c-blue" style="left:30%;width:10%;font-size:6px;">CC: "Cinematic pacing..."</div>
+            <div class="pp-clip c-blue" style="left:42%;width:16%;font-size:6px;">CC: "Precision color grade..."</div>
+            <div class="pp-clip c-blue" style="left:60%;width:12%;font-size:6px;">CC: "SaaS motion design..."</div>
+            <div class="pp-clip c-blue" style="left:74%;width:14%;font-size:6px;">CC: "Frame-perfect delivery."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo">Rama Sai Mohith Varma</div>
+  <div class="nav-links">
+    <a href="#profile">Overview</a>
+    <a href="#work">Work Portfolio</a>
+    <a href="#certs">Certifications</a>
+    <a href="#pricing">Pricing Plans</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/in/mohith-varma-alluri-023133226/" target="_blank" style="color: var(--apple-accent);">LinkedIn ↗</a>
+  </div>
+</nav>
+
+<div class="main-container">
+
+  <div class="hero">
+    <div class="hero-pill"><div class="dot"></div> Professional Video & Motion Pipeline</div>
+    <h1>Premium Media Scaling.<br/>Pixel-Perfect Delivery.</h1>
+    <p>Independent video post-production tailored for modern tech, SaaS presentations, film modules, and high-retention digital advertisements.</p>
+    <div>
+      <a href="#work" class="apple-btn btn-primary">Launch Production Reel</a>
+      <a href="#contact" class="apple-btn btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+
+  <div id="profile" class="profile-section reveal">
+    <div class="profile-visual">
+      <div class="profile-image-wrapper">
+        <img src="73DEBB93-00C9-488E-9C1D-F04CA6E20492.PNG" alt="Rama Sai Mohith Varma Profile"/>
+      </div>
+    </div>
+    <div class="profile-info">
+      <div class="section-tag">Creative Engineering</div>
+      <h3>The Post-Production Engine</h3>
+      <p>I build custom timeline workflows backed by structural pacing curves, flawless scene balancing protocols, and specialized mastering mechanics. My pipeline integrates industry-leading software suites to output industry-standard digital products.</p>
+      
+      <div style="font-size: 0.8rem; font-weight:600; color:var(--apple-text); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Production Ecosystem</div>
+      <div class="tools-dock">
+        <div class="tool-item">Premiere Pro</div>
+        <div class="tool-item">DaVinci Resolve</div>
+        <div class="tool-item">After Effects</div>
+        <div class="tool-item">Pixelmator Pro</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="section-tag">Showcase Modules</div>
+    <h2 class="section-title">Visual Deliverables</h2>
+
+    <div class="video-grid">
+
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781285343/my_portfolio_edfit_xaqq7r.mp4" 
+           data-title="apple saas animation video edit of my portfolio" 
+           data-desc="Apple SaaS signature interface editing, utilizing slick timing components, micro-scale shifts, and clean color maps.">
+        <div class="video-container">
+          <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781285343/my_portfolio_edfit_xaqq7r.mp4" muted loop preload="metadata" playsinline></video>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
+        </div>
+        <div class="card-details">
+          <div class="card-badge">SaaS Animation</div>
+          <div class="card-title">apple saas animation video edit of my portfolio</div>
+          <div class="card-description">Apple SaaS signature interface editing, utilizing slick timing components, micro-scale shifts, and clean color maps.</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286032/Comp_1_1_eevrqw.mp4" 
+           data-title="Basuri Production" 
+           data-desc="Cinematic timeline engineering layout featuring comprehensive atmospheric sound editing configurations and multi-point grading curves.">
+        <div class="video-container">
+          <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286032/Comp_1_1_eevrqw.mp4" muted loop preload="metadata" playsinline></video>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
+        </div>
+        <div class="card-details">
+          <div class="card-badge working">Project currently working</div>
+          <div class="card-title">Basuri Production</div>
+          <div class="card-description">Cinematic timeline engineering layout featuring comprehensive atmospheric sound editing configurations and multi-point grading curves.</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal" 
+           data-type="native"
+           data-video="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286329/0510_atds6k.mov" 
+           data-title="ai edited video sample" 
+           data-desc="Exploration combining neural frame interpretation variables along with manual core masking layouts for futuristic continuity.">
+        <div class="video-container">
+          <video src="https://res.cloudinary.com/djtmrwokz/video/upload/v1781286329/0510_atds6k.mov" muted loop preload="metadata" playsinline></video>
+          <div class="play-indicator">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFF"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
+        </div>
+        <div class="card-details">
+          <div class="card-badge">AI Pipeline</div>
+          <div class="card-title">ai edited video sample</div>
+          <div class="card-description">Exploration combining neural frame interpretation variables along with manual core masking layouts for futuristic continuity.</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal" 
+           data-type="embedded-frame"
+           data-title="Jumpshare Master Showcase Reel" 
+           data-desc="Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.">
+        <div class="video-container">
+          <iframe id="js_video_iframe" src="https://jumpshare.com/embed/fC7IpBiTUOnzq0NsCty4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+        <div class="card-details">
+          <div class="card-badge jumpshare">Live Stream Module</div>
+          <div class="card-title">Jumpshare Master Showcase Reel</div>
+          <div class="card-description">Dynamic cloud matrix project presentation delivering structural framing sequences and timeline processing execution setups.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="certs" class="reveal">
+    <div class="section-tag">Verified Credentials</div>
+    <h2 class="section-title">Academic Architecture</h2>
+    
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div>
+          <div class="cert-issuer">Plan At B ✦ Academic Division</div>
+          <div class="cert-name">Premiere Pro Basic - Advance 2026</div>
+        </div>
+        <div class="cert-meta">
+          <p><strong>Syllabus Scope:</strong> Advanced timeline construction, sub-frame processing layout, and system output mastering.</p>
+          <p style="margin-top:8px;"><strong>Credential ID:</strong> <span class="cert-id">#b5f9a617958fae76</span></p>
+          <p style="font-size:0.75rem; color:var(--apple-muted); margin-top:4px;">Issued by Karthik Raghavarapu • May 31, 2026</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div>
+          <div class="cert-issuer">Plan At B ✦ Academic Division</div>
+          <div class="cert-name">Mastering After Effects 2026</div>
+        </div>
+        <div class="cert-meta">
+          <p><strong>Syllabus Scope:</strong> Multi-axis kinetic interpolation parameters, advanced canvas masking, and modern SaaS animation layouts.</p>
+          <p style="margin-top:8px;"><strong>Credential ID:</strong> <span class="cert-id">#d2ffe8d9e6ad007b</span></p>
+          <p style="font-size:0.75rem; color:var(--apple-muted); margin-top:4px;">Issued by Karthik Raghavarapu • June 9, 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="reveal">
+    <div class="section-tag">Investment Models</div>
+    <h2 class="section-title">Reasonable Project Rates</h2>
+    
+    <div class="pricing-grid">
+      
+      <div class="price-card">
+        <div class="price-tier">Short Form Reel</div>
+        <div class="price-amount">₹1,999 <span>/ video</span></div>
+        <div class="price-desc">Optimized for Instagram Reels, YouTube Shorts, or TikTok ads with rapid-cut pacing framework.</div>
+        <ul class="price-features-list">
+          <li>Hook Pacing & Fluid Sequencing</li>
+          <li>Basic Dynamic Subtitles & Text Pop</li>
+          <li>Sound Balancing & Noise Cut</li>
+          <li>Premiere Pro Workflow Mapping</li>
+          <li>1 Revision/Iteration Round</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Select Reel Cut</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Mid-Form Asset</div>
+        <div class="price-amount">₹4,499 <span>/ project</span></div>
+        <div class="price-desc">Tailored for 2 to 10 minute content maps: video essays, software vlogs, or brand overviews.</div>
+        <ul class="price-features-list">
+          <li>2–10 Min Extended Sequence Control</li>
+          <li>A-Roll / B-Roll Intersection Balance</li>
+          <li>Standard Color Curve Equalizer</li>
+          <li>Immersive Sound Design Layers</li>
+          <li>2 Detailed Revision Rounds</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Order Project</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Basic Retainer</div>
+        <div class="price-amount">₹14,999 <span>/ month</span></div>
+        <div class="price-desc">Steady, entry-level production pipeline scaling for consistent creators or brand pages.</div>
+        <ul class="price-features-list">
+          <li>Up to 6 High-Retention Video Cuts</li>
+          <li>Narrative Continuity Structural Tuning</li>
+          <li>DaVinci Resolve Color Grade Basic</li>
+          <li>Integrated Graphic & Subtitle Presets</li>
+          <li>Standard Email Support Comms</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Secure Basic</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Advance Package</div>
+        <div class="price-amount">₹29,999 <span>/ month</span></div>
+        <div class="price-desc">Elevated processing frameworks engineered for serious content strategy channels.</div>
+        <ul class="price-features-list">
+          <li>Up to 12 Advanced Cinematic Cutouts</li>
+          <li>After Effects Kinematics & Typography</li>
+          <li>Pro SFX Soundscapes & Foley Textures</li>
+          <li>Custom SaaS Motion Lower-Third Assets</li>
+          <li>Priority Timeline Queue Access</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-standard">Upgrade to Advance</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-tag-badge">Elite Tier</div>
+        <div class="price-tier">Premium Growth Hub</div>
+        <div class="price-amount">₹65,000 <span>/ month</span></div>
+        <div class="price-desc">Complete end-to-end digital identity transformation. Complete hand-off handling paired with storytelling engineering.</div>
+        <ul class="price-features-list">
+          <li><strong>20 High-End Cinematic Videos</strong> Per Month</li>
+          <li><strong>Full Instagram Page Handling</strong> & Strategy</li>
+          <li>Deep Script Hook & Storytelling Formats</li>
+          <li>DaVinci Resolve Pro Grading & LUT Tuning</li>
+          <li>After Effects SaaS Animations & Text Maps</li>
+          <li>Complete Sound Architecture Mastery Layers</li>
+          <li>Direct WhatsApp Strategy Feedback Loop</li>
+        </ul>
+        <a href="#contact" class="price-btn btn-tier-featured">Launch Ecosystem</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="reveal" style="padding-bottom: 120px;">
+    <div style="background: var(--apple-card); border: 1px solid var(--apple-border); border-radius: 24px; padding: 64px; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 14px; letter-spacing: -0.5px;">Initiate Your Sequence</h2>
+      <p style="color: var(--apple-muted); max-width: 460px; margin: 0 auto 36px; font-size: 0.95rem; line-height: 1.5;">Let's calibrate your post-production systems immediately. Reach out directly using the verified secure links below.</p>
+      
+      <div class="contact-channels-grid">
+        <a href="mailto:alluriram8142@gmail.com" class="contact-method-card">
+          <span class="contact-icon">✉️</span>
+          <span class="contact-label">Email Channels</span>
+          <span class="contact-value">alluriram8142@gmail.com</span>
+        </a>
+        <a href="tel:+919515587761" class="contact-method-card">
+          <span class="contact-icon">📞</span>
+          <span class="contact-label">Secure Phone</span>
+          <span class="contact-value">+91 95155 87761</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mohith-varma-alluri-023133226/" target="_blank" class="contact-method-card">
+          <span class="contact-icon">💼</span>
+          <span class="contact-label">LinkedIn Grid</span>
+          <span class="contact-value">mohith-varma-alluri-023133226</span>
+        </a>
+      </div>
+
+      <a href="mailto:alluriram8142@gmail.com" class="apple-btn btn-primary">Connect via Secure Mail</a>
+    </div>
+  </section>
+
+</div>
+
+<div class="lightbox" id="videoLightbox">
+  <div class="lightbox-body">
+    <div style="position: relative;">
+      <button class="lightbox-dismiss" id="lightboxDismiss">✕</button>
+      <video id="lightboxVideo" controls autoplay playsinline></video>
+      <div id="lightboxIframeWrapper" class="lightbox-iframe-wrapper">
+        <iframe id="lightboxIframe" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="lightbox-header">
+      <div class="lightbox-title" id="lightboxTitle">Project Context</div>
+      <div class="lightbox-desc" id="lightboxDesc">Project breakdown analysis details.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Rama Sai Mohith Varma. Authenticated Engineering Systems. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="mailto:alluriram8142@gmail.com">Email</a> • 
+    <a href="tel:+919515587761">Phone</a> • 
+    <a href="https://www.linkedin.com/in/mohith-varma-alluri-023133226/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el =>
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05 }).observe(el)
+  );
+
+  document.querySelectorAll('.video-card').forEach(card => {
+    if (card.dataset.type === 'native') {
+      const vid = card.querySelector('video');
+      card.addEventListener('mouseenter', () => vid && vid.play().catch(()=>{}));
+      card.addEventListener('mouseleave', () => { if(vid){ vid.pause(); vid.currentTime=0; } });
+    }
+  });
+
+  const portalLightbox  = document.getElementById('videoLightbox');
+  const enginePlayer    = document.getElementById('lightboxVideo');
+  const iframeWrapper   = document.getElementById('lightboxIframeWrapper');
+  const iframePlayer    = document.getElementById('lightboxIframe');
+  const textHeadline    = document.getElementById('lightboxTitle');
+  const textParagraph   = document.getElementById('lightboxDesc');
+  const dismissPortal   = document.getElementById('lightboxDismiss');
+
+  function deployLightbox(type, url, title, description){
+    textHeadline.textContent = title; 
+    textParagraph.textContent = description;
+    
+    if (type === 'iframe') {
+      enginePlayer.style.display = 'none';
+      iframeWrapper.style.display = 'block';
+      iframePlayer.src = url;
+      portalLightbox.classList.add('active');
+    } else if (type === 'native') {
+      iframeWrapper.style.display = 'none';
+      iframePlayer.src = '';
+      enginePlayer.style.display = 'block';
+      enginePlayer.src = url;
+      enginePlayer.play().catch(()=>{});
+      portalLightbox.classList.add('active');
+    }
+  }
+  
+  function collapseLightbox(){
+    portalLightbox.classList.remove('active');
+    enginePlayer.pause(); 
+    enginePlayer.src = '';
+    iframePlayer.src = '';
+  }
+  
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if(card.dataset.type !== 'embedded-frame') {
+        deployLightbox(card.dataset.type, card.dataset.video, card.dataset.title, card.dataset.desc);
+      }
+    });
+  });
+  
+  dismissPortal.addEventListener('click', collapseLightbox);
+  portalLightbox.addEventListener('click', e => { if(e.target===portalLightbox) collapseLightbox(); });
+
+  const timecodeEl = document.getElementById('ppTimecode');
+  const monitorTcEl = document.getElementById('monitorTc');
+  let frames = 0;
+  const FPS = 24;
+  setInterval(()=>{
+    frames++;
+    const s = Math.floor(frames/FPS) % 60;
+    const m = Math.floor(frames/(FPS*60)) % 60;
+    const h = Math.floor(frames/(FPS*3600)) % 24;
+    const f = frames % FPS;
+    const tc = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(f).padStart(2,'0')}`;
+    if(timecodeEl) timecodeEl.textContent = tc;
+    if(monitorTcEl) {
+      const mf = (frames + 200) % (FPS * 60 * 10);
+      const ms2 = Math.floor(mf/FPS) % 60;
+      const mm  = Math.floor(mf/(FPS*60)) % 60;
+      monitorTcEl.textContent = `00:${String(mm).padStart(2,'0')}:${String(ms2).padStart(2,'0')}:${String(mf%FPS).padStart(2,'0')}`;
+    }
+  }, 1000/FPS);
+
+  function drawRuler(){
+    const canvas = document.getElementById('rulerCanvas');
+    if(!canvas) return;
+    const w = canvas.parentElement.offsetWidth;
+    const h = 20;
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = 'rgba(10,10,14,0.98)';
+    ctx.fillRect(0,0,w,h);
+    const secWidth = w / 60;
+    for(let s=0; s<=60; s++){
+      const x = s * secWidth;
+      const isMajor = s % 5 === 0;
+      ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x,isMajor?0:10); ctx.lineTo(x,h); ctx.stroke();
+      if(isMajor && s>0){
+        const mins = Math.floor(s/60);
+        const secs = s%60;
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '7px SF Mono, Courier New, monospace';
+        ctx.fillText(`${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}:00`, x+2, h-3);
+      }
+    }
+  }
+  drawRuler();
+  window.addEventListener('resize', drawRuler);
+
+  (function monitorLoop(){
+    const canvas = document.getElementById('monitorCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W=200, H=112;
+    canvas.width=W; canvas.height=H;
+    let t=0;
+    function draw(){
+      t += 0.008;
+      const grad = ctx.createLinearGradient(0,0,W,H);
+      const r = Math.floor(60 + 30*Math.sin(t));
+      const g = Math.floor(100 + 40*Math.sin(t*0.7+1));
+      const b = Math.floor(140 + 50*Math.cos(t*0.5+2));
+      grad.addColorStop(0, `rgb(${r},${g},${b})`);
+      grad.addColorStop(0.5,`rgb(${Math.floor(r*0.6)},${Math.floor(g*0.8)},${Math.floor(b*1.1)})`);
+      grad.addColorStop(1, `rgb(${Math.floor(r*1.2)},${Math.floor(g*0.5)},${Math.floor(b*0.6)})`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
+
+      const imgd = ctx.getImageData(0,0,W,H);
+      const pix = imgd.data;
+      for(let i=0;i<pix.length;i+=4){
+        const n=(Math.random()-0.5)*18;
+        pix[i]+=n; pix[i+1]+=n; pix[i+2]+=n;
+      }
+      ctx.putImageData(imgd,0,0);
+
+      ctx.fillStyle='#000';
+      ctx.fillRect(0,0,W,10);
+      ctx.fillRect(0,H-10,W,10);
+
+      ctx.strokeStyle='rgba(255,255,255,0.12)';
+      ctx.lineWidth=0.5;
+      ctx.strokeRect(10,14,W-20,H-28);
+
+      ctx.strokeStyle='rgba(255,255,255,0.15)';
+      ctx.beginPath(); ctx.moveTo(W/2-8,H/2); ctx.lineTo(W/2+8,H/2);
+      ctx.moveTo(W/2,H/2-8); ctx.lineTo(W/2,H/2+8); ctx.stroke();
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  (function scopeLoop(){
+    const canvas = document.getElementById('scopeCanvas');
+    if(!canvas) return;
+    const W=130, H=110;
+    canvas.width=W; canvas.height=H;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    function draw(){
+      t+=0.03;
+      ctx.fillStyle='rgba(5,5,8,0.9)';
+      ctx.fillRect(0,0,W,H);
+
+      const mid = H/2 - 8;
+      ctx.strokeStyle='rgba(0,255,80,0.6)';
+      ctx.lineWidth=0.8;
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.4*Math.sin(x*0.08+t) + 0.3*Math.sin(x*0.18+t*1.3) + 0.2*Math.sin(x*0.04+t*0.7));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,80,0,0.5)';
+      ctx.beginPath();
+      for(let x=0;x<W;x++){
+        const v = mid - (mid-8) * (0.35*Math.cos(x*0.09+t*1.1) + 0.25*Math.sin(x*0.15+t*0.8));
+        x===0 ? ctx.moveTo(x,v) : ctx.lineTo(x,v);
+      }
+      ctx.stroke();
+
+      ctx.strokeStyle='rgba(255,255,255,0.08)';
+      ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(0,mid+10); ctx.lineTo(W,mid+10); ctx.stroke();
+
+      const cx=W/2, cy=(H+mid+10)/2, cr=20;
+      ctx.strokeStyle='rgba(255,255,255,0.06)';
+      ctx.lineWidth=0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,cr,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,cr*0.66,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle='rgba(0,255,80,0.5)';
+      for(let i=0;i<40;i++){
+        const a = (i/40)*Math.PI*2 + t*0.2;
+        const r2 = cr*(0.3+0.5*Math.abs(Math.sin(i*0.7+t)));
+        const px=cx+r2*Math.cos(a), py=cy+r2*Math.sin(a);
+        ctx.beginPath(); ctx.arc(px,py,1,0,Math.PI*2); ctx.fill();
+      }
+
+      ctx.fillStyle='rgba(255,255,255,0.25)';
+      ctx.font='6px SF Mono, monospace';
+      ctx.fillText('WAVEFORM',2,8);
+      ctx.fillText('VECTOR',2,mid+18);
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  (function bgLoop(){
+    const canvas = document.getElementById('bg-edit-canvas');
+    if(!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    let t=0;
+    window.addEventListener('resize',()=>{
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+    });
+    function draw(){
+      t+=0.004;
+      const W=canvas.width, H=canvas.height;
+      const bg = ctx.createRadialGradient(W*0.3,H*0.4,0,W*0.5,H*0.5,W*0.8);
+      bg.addColorStop(0, `hsl(${220+20*Math.sin(t)},40%,12%)`);
+      bg.addColorStop(0.5,`hsl(${200+15*Math.cos(t*0.7)},30%,7%)`);
+      bg.addColorStop(1, `hsl(${180+10*Math.sin(t*0.4)},20%,3%)`);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      for(let i=0;i<3;i++){
+        const angle = Math.PI*0.3 + i*0.3 + Math.sin(t*0.5+i)*0.05;
+        const x = W*(0.2+i*0.3);
+        const grad2 = ctx.createLinearGradient(x,0,x+Math.cos(angle)*W*0.6, Math.sin(angle)*H*0.8);
+        grad2.addColorStop(0,`rgba(41,151,255,0.02)`);
+        grad2.addColorStop(1,'transparent');
+        ctx.fillStyle=grad2;
+        ctx.save();
+        ctx.translate(x,0);
+        ctx.rotate(angle - Math.PI/2);
+        ctx.fillRect(-60,0,120,W);
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  function animateWaveCanvas(id, colorR, colorG, colorB, seed){
+    const c = document.getElementById(id);
+    if(!c) return;
+    const ctx = c.getContext('2d');
+    let t=seed||0;
+    function draw(){
+      t+=0.04;
+      const W=c.offsetWidth||100, H=c.offsetHeight||26;
+      c.width=W; c.height=H;
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle=`rgba(${colorR},${colorG},${colorB},0.7)`;
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      const mid=H/2;
+      for(let x=0;x<W;x++){
+        const v = mid * (0.5*Math.sin(x*0.15+t) + 0.3*Math.sin(x*0.3+t*1.5+seed) + 0.15*Math.cos(x*0.08+t*0.6));
+        x===0 ? ctx.moveTo(x, mid+v) : ctx.lineTo(x, mid+v);
+      }
+      ctx.stroke();
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+  animateWaveCanvas('waveA1a',255,180,50,0);
+  animateWaveCanvas('waveA1b',255,180,50,1.5);
+  animateWaveCanvas('waveA2a',80,220,120,0.8);
+  animateWaveCanvas('waveA2b',80,220,120,2.1);
+  animateWaveCanvas('waveA2c',80,220,120,3.4);
+  animateWaveCanvas('waveA2d',80,220,120,0.3);
+</script>
+</body>
+</html>
+
+```
